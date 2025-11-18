@@ -126,14 +126,12 @@
       </div>
     </div>
   </section>
-  
+
   {{-- Support Features --}}
   <section class="py-5 bg-light">
     <div class="container text-center">
       <h2 class="mb-3">Our Support Services</h2>
-      <p class="text-muted mb-5">
-        Comprehensive support to ensure your technology infrastructure runs seamlessly
-      </p>
+      <p class="text-muted mb-5">Comprehensive support to ensure your technology infrastructure runs seamlessly</p>
       <div class="row g-4">
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
@@ -195,35 +193,8 @@
 
   {{-- Support Plans --}}
   <section class="py-5 bg-white">
-    <div class="container text-center">
-      <h2 class="mb-3">Support Plans</h2>
-      <p class="text-muted mb-5">Choose the support plan that fits your business needs</p>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="border rounded p-4 h-100">
-            <h5>Basic Support</h5>
-            <p class="text-muted">Essential support for small businesses</p>
-            <ul class="list-unstyled small text-muted">
-              <li><i class="bi bi-check-circle text-success me-2"></i> Business hours support</li>
-              <li><i class="bi bi-check-circle text-success me-2"></i> Email and phone support</li>
-              <li><i class="bi bi-check-circle text-success me-2"></i> Response within 24 hours</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="border rounded p-4 h-100 bg-primary-blue text-white shadow-lg">
-            <span class="badge bg-accent-orange mb-2">POPULAR</span>
-            <h5>Premium Support</h5>
-            <p>Comprehensive support for growing businesses</p>
-            <ul class="list-unstyled small">
-              <li><i class="bi bi-check-circle text-accent-orange me-2"></i> 24/7 support availability</li>
-              <li><i class="bi bi-check-circle text-accent-orange me-2"></i> Priority response</li>
-              <li><i class="bi bi-check-circle text-accent-orange me-2"></i> Remote monitoring included</li>
-              <li><i class="bi bi-check-circle text-accent-orange me-2"></i> Quarterly system reviews</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-4">
+    <div class="container text-center
+            <div class="col-md-4">
           <div class="border rounded p-4 h-100">
             <h5>Enterprise Support</h5>
             <p class="text-muted">Dedicated support for large organizations</p>
@@ -238,4 +209,18 @@
       </div>
     </div>
   </section>
+
+  {{-- CTA Section --}}
+  <section class="py-5 bg-primary-blue text-white text-center">
+    <div class="container">
+      <h2 class="mb-3">Need Immediate Assistance?</h2>
+      <p class="lead text-gray-200 mb-4">
+        Our support team is available 24/7 to resolve your technical issues quickly and efficiently.
+      </p>
+      <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white">
+        Contact Support Now
+      </a>
+    </div>
+  </section>
+
 @endsection
