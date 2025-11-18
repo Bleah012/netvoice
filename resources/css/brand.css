@@ -1,0 +1,26 @@
+:root {
+    --primary-blue: #0b4aa2;
+    --primary-blue-dark: #083b82;
+    --accent-orange: #ff7a1a;
+    --accent-orange-dark: #e3640f;
+}
+
+.bg-primary-blue {
+    background-color: var(--primary-blue) !important;
+}
+.bg-primary-blue-dark {
+    background-color: var(--primary-blue-dark) !important;
+}
+.bg-accent-orange {
+    background-color: var(--accent-orange) !important;
+}
+.bg-accent-orange-dark {
+    background-color: var(--accent-orange-dark) !important;
+}
+
+.text-primary-blue {
+    color: var(--primary-blue) !important;
+}
+.text-accent-orange {
+    color: var(--accent-orange) !important;
+}
