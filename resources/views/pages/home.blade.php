@@ -16,7 +16,7 @@
     </div>
     {{-- Background cabling photo --}}
     <div class="hero-bg position-absolute top-0 start-0 w-100 h-100 opacity-25">
-      <img src="{{ asset('images/cabling1.jpg') }}" class="w-100 h-100 object-fit-cover" alt="Cabling Infrastructure">
+      <img src="{{ asset('images/clients/server3.jpeg') }}" class="w-100 h-100 object-fit-cover" alt="Server 3 Infrastructure">
     </div>
   </section>
 
@@ -24,7 +24,7 @@
   <section class="py-5 bg-white text-center">
     <div class="container">
       <h2 class="mb-4">Meet the NetVoice Team</h2>
-      <img src="{{ asset('images/team.jpg') }}" class="img-fluid rounded shadow animate__animated animate__zoomIn" alt="Company Team">
+      <img src="{{ asset('images/clients/IMG_20161028_162144.jpg') }}" class="img-fluid rounded shadow animate__animated animate__zoomIn" alt="Our Company Team A">
       <p class="mt-3 text-muted">Our dedicated professionals ensure seamless communication solutions for your business.</p>
     </div>
   </section>
@@ -72,7 +72,7 @@
       <h2 class="text-center mb-5">Our Infrastructure</h2>
       <div class="row align-items-center">
         <div class="col-md-6 animate__animated animate__fadeInLeft">
-          <img src="{{ asset('images/cabling2.jpg') }}" class="img-fluid rounded shadow" alt="Cabling Infrastructure">
+          <img src="{{ asset('images/clients/server1.jpeg') }}" class="img-fluid rounded shadow" alt="Server 1 Infrastructure">
         </div>
         <div class="col-md-6 animate__animated animate__fadeInRight">
           <p class="lead text-muted">We deploy robust cabling systems that ensure high-speed, reliable connectivity across your premises.</p>
@@ -88,13 +88,13 @@
       <div id="serverCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{{ asset('images/server1.jpg') }}" class="d-block w-100" alt="Server 1">
+           <img src="{{ asset('images/clients/server1.jpeg') }}" class="d-block w-100" alt="Server 1 Infrastructure">
           </div>
           <div class="carousel-item">
-            <img src="{{ asset('images/server2.jpg') }}" class="d-block w-100" alt="Server 2">
+            <img src="{{ asset('images/clients/server2.jpeg') }}" class="d-block w-100" alt="Server 2 Infrastructure">
           </div>
           <div class="carousel-item">
-            <img src="{{ asset('images/server3.jpg') }}" class="d-block w-100" alt="Server 3">
+            <img src="{{ asset('images/clients/server3.jpeg') }}" class="d-block w-100" alt="Server 3 Infrastructure">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#serverCarousel" data-bs-slide="prev">
