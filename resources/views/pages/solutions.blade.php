@@ -7,96 +7,125 @@
   <section class="bg-primary-blue text-white py-5">
     <div class="container">
       <div class="col-lg-8">
-        <h1 class="mb-3">Our Solutions</h1>
-        <p class="lead text-gray-200">
-          Comprehensive technology solutions that drive digital transformation and business growth
+        <h1 class="mb-3 animate__animated animate__fadeInDown">Our Solutions</h1>
+        <p class="lead text-gray-200 animate__animated animate__fadeInUp">
+          Innovative ICT solutions tailored to solve complex challenges and empower your business growth.
         </p>
       </div>
     </div>
   </section>
 
   {{-- Solutions Overview --}}
+  <section class="py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="mb-4">Comprehensive ICT Solutions</h2>
+      <p class="text-muted mb-5">Explore our wide range of solutions designed to meet diverse industry demands.</p>
+
+      <div class="row g-4">
+        {{-- Enterprise Solutions --}}
+        <div class="col-md-6 col-lg-4 animate__animated animate__fadeInLeft">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3" style="width:60px;height:60px;">
+                <i class="bi bi-building fs-3"></i>
+              </div>
+              <h5 class="card-title text-primary-blue">Enterprise Solutions</h5>
+              <p class="text-muted">Scalable enterprise ICT systems including ERP, CRM, and secure communication platforms.</p>
+            </div>
+          </div>
+        </div>
+
+        {{-- Cloud Solutions --}}
+        <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3" style="width:60px;height:60px;">
+                <i class="bi bi-cloud fs-3"></i>
+              </div>
+              <h5 class="card-title text-primary-blue">Cloud Solutions</h5>
+              <p class="text-muted">Hybrid cloud integration, secure storage, and disaster recovery solutions for modern businesses.</p>
+            </div>
+          </div>
+        </div>
+
+        {{-- Cybersecurity Solutions --}}
+        <div class="col-md-6 col-lg-4 animate__animated animate__fadeInRight">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3" style="width:60px;height:60px;">
+                <i class="bi bi-shield-lock fs-3"></i>
+              </div>
+              <h5 class="card-title text-primary-blue">Cybersecurity Solutions</h5>
+              <p class="text-muted">Advanced threat protection, firewalls, and compliance-ready systems to safeguard your digital assets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {{-- Specialized Solutions --}}
   <section class="py-5 bg-white">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="mb-3">End-to-End ICT Solutions</h2>
-        <p class="text-muted">From strategic planning to implementation and support, we provide complete solutions tailored to your business needs</p>
-      </div>
-
-      {{-- Example Solution Block --}}
-      <div class="row align-items-center mb-5">
-        <div class="col-lg-6">
-          <div class="d-flex align-items-center mb-3">
-            <div class="rounded bg-primary-blue text-white d-flex align-items-center justify-content-center me-3" style="width:70px;height:70px;">
-              <i class="bi bi-search fs-2"></i>
+      <h2 class="text-center mb-4">Specialized Solutions</h2>
+      <p class="text-muted text-center mb-5">Beyond core offerings, we provide tailored solutions for complex ICT challenges.</p>
+      <div class="row g-4">
+        {{-- Data Center Solutions --}}
+        <div class="col-md-6 animate__animated animate__fadeInLeft">
+          <div class="bg-light p-4 rounded shadow-sm h-100">
+            <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3" style="width:60px;height:60px;">
+              <i class="bi bi-server fs-3"></i>
             </div>
-            <h4 class="mb-0">Network Consulting</h4>
+            <h5 class="mb-3">Data Center Solutions</h5>
+            <ul class="list-unstyled small text-muted">
+              <li><span class="text-accent-orange">•</span> Server deployment & virtualization</li>
+              <li><span class="text-accent-orange">•</span> High-availability infrastructure</li>
+              <li><span class="text-accent-orange">•</span> Monitoring & performance optimization</li>
+              <li><span class="text-accent-orange">•</span> Disaster recovery planning</li>
+            </ul>
           </div>
-          <p class="text-muted">Expert guidance to optimize your network infrastructure and IT strategy</p>
-          <ul class="list-unstyled small text-muted">
-            <li><i class="bi bi-check-circle text-accent-orange me-2"></i> Network assessment and audit</li>
-            <li><i class="bi bi-check-circle text-accent-orange me-2"></i> Technology roadmap planning</li>
-            <li><i class="bi bi-check-circle text-accent-orange me-2"></i> Cost optimization strategies</li>
-            <li><i class="bi bi-check-circle text-accent-orange me-2"></i> Security best practices</li>
-            <li><i class="bi bi-check-circle text-accent-orange me-2"></i> Scalability planning</li>
-          </ul>
-          <a href="{{ route('contact') }}" class="btn bg-primary-blue text-white mt-3">
-            Learn More <i class="bi bi-arrow-right"></i>
-          </a>
         </div>
 
-        <div class="col-lg-6">
-          <div class="bg-light p-4 rounded border-start border-4 border-accent-orange">
-            <div class="mb-3 d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm">
-              <span>Assessment</span>
-              <div class="bg-accent-orange rounded-pill" style="width:100px;height:8px;"></div>
+        {{-- Digital Transformation --}}
+        <div class="col-md-6 animate__animated animate__fadeInRight">
+          <div class="bg-light p-4 rounded shadow-sm h-100">
+            <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3" style="width:60px;height:60px;">
+              <i class="bi bi-laptop fs-3"></i>
             </div>
-            <div class="mb-3 d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm">
-              <span>Planning</span>
-              <div class="bg-accent-orange rounded-pill" style="width:80px;height:8px;"></div>
-            </div>
-            <div class="mb-3 d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm">
-              <span>Implementation</span>
-              <div class="bg-accent-orange rounded-pill" style="width:120px;height:8px;"></div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm">
-              <span>Optimization</span>
-              <div class="bg-accent-orange rounded-pill" style="width:60px;height:8px;"></div>
-            </div>
+            <h5 class="mb-3">Digital Transformation</h5>
+            <ul class="list-unstyled small text-muted">
+              <li><span class="text-accent-orange">•</span> Cloud migration strategies</li>
+              <li><span class="text-accent-orange">•</span> Business process automation</li>
+              <li><span class="text-accent-orange">•</span> Collaboration & productivity tools</li>
+              <li><span class="text-accent-orange">•</span> Data analytics & insights</li>
+            </ul>
           </div>
         </div>
       </div>
-
-      {{-- Repeat similar blocks for Network Design, System Integration, Project Management, Broadband --}}
     </div>
   </section>
 
-  {{-- Solution Methodology --}}
+  {{-- Success Metrics --}}
   <section class="py-5 bg-light">
     <div class="container text-center">
-      <h2 class="mb-4">Our Solution Methodology</h2>
-      <p class="text-muted mb-5">A proven approach to delivering successful technology solutions</p>
-
+      <h2 class="mb-4 animate__animated animate__fadeInUp">Our Proven Results</h2>
+      <p class="text-muted mb-5">Delivering measurable impact through innovative solutions</p>
       <div class="row g-4">
         <div class="col-md-3">
-          <div class="rounded-circle bg-primary-blue text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width:70px;height:70px;">1</div>
-          <h5>Discover</h5>
-          <p class="text-muted">Understanding your business goals and technical requirements</p>
+          <h3 class="text-accent-orange">250+</h3>
+          <p class="text-muted">Cloud Deployments</p>
         </div>
         <div class="col-md-3">
-          <div class="rounded-circle bg-primary-blue text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width:70px;height:70px;">2</div>
-          <h5>Strategize</h5>
-          <p class="text-muted">Developing a comprehensive solution strategy and roadmap</p>
+          <h3 class="text-accent-orange">180+</h3>
+          <p class="text-muted">Data Center Projects</p>
         </div>
         <div class="col-md-3">
-          <div class="rounded-circle bg-primary-blue text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width:70px;height:70px;">3</div>
-          <h5>Execute</h5>
-          <p class="text-muted">Implementing solutions with precision and expertise</p>
+          <h3 class="text-accent-orange">300+</h3>
+          <p class="text-muted">Cybersecurity Solutions</p>
         </div>
         <div class="col-md-3">
-          <div class="rounded-circle bg-primary-blue text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width:70px;height:70px;">4</div>
-          <h5>Optimize</h5>
-          <p class="text-muted">Continuous improvement and performance optimization</p>
+          <h3 class="text-accent-orange">95%</h3>
+          <p class="text-muted">Client Satisfaction Rate</p>
         </div>
       </div>
     </div>
@@ -105,12 +134,12 @@
   {{-- CTA Section --}}
   <section class="py-5 bg-primary-blue text-white text-center">
     <div class="container">
-      <h2 class="mb-3">Ready to Transform Your Infrastructure?</h2>
-      <p class="lead text-gray-200 mb-4">
-        Let our experts design and implement the perfect solution for your business
+      <h2 class="mb-3 animate__animated animate__fadeInUp">Ready to Implement Smart Solutions?</h2>
+      <p class="lead text-gray-200 mb-4 animate__animated animate__fadeInUp">
+        Partner with NetVoice to transform your business with reliable, secure, and scalable ICT solutions.
       </p>
-      <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white">
-        Schedule a Consultation <i class="bi bi-arrow-right"></i>
+      <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white animate__animated animate__pulse">
+        Contact Us Today
       </a>
     </div>
   </section>
