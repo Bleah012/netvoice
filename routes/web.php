@@ -10,3 +10,7 @@ Route::view('/industries', 'pages.industries')->name('industries');
 Route::view('/partners', 'pages.partners')->name('partners');
 Route::view('/support', 'pages.support')->name('support');
 Route::view('/contact', 'pages.contact')->name('contact');
+
+// New routes
+Route::view('/dashboard', 'pages.dashboard')->name('dashboard');
+Route::view('/plans', 'pages.plans')->name('plans');
