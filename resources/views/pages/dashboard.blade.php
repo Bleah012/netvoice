@@ -10,28 +10,33 @@
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active text-primary-blue" href="#">
+              <a class="nav-link active text-primary-blue" href="{{ route('dashboard') }}">
                 <i class="bi bi-speedometer2"></i> Overview
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-muted" href="#">
-                <i class="bi bi-person"></i> Profile
+              <a class="nav-link text-muted" href="{{ route('clients.index') }}">
+                <i class="bi bi-people"></i> Clients
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-muted" href="#">
-                <i class="bi bi-cart"></i> Orders
+              <a class="nav-link text-muted" href="{{ route('projects.index') }}">
+                <i class="bi bi-folder"></i> Projects
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-muted" href="#">
+              <a class="nav-link text-muted" href="{{ route('tickets.index') }}">
                 <i class="bi bi-life-preserver"></i> Support Tickets
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-muted" href="#">
-                <i class="bi bi-gear"></i> Settings
+              <a class="nav-link text-muted" href="{{ route('users.index') }}">
+                <i class="bi bi-person"></i> Users
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="{{ route('roles.index') }}">
+                <i class="bi bi-shield-lock"></i> Roles
               </a>
             </li>
           </ul>
@@ -133,12 +138,12 @@
           </a>
         </div>
         <div class="col-md-4 animate__animated animate__fadeInUp">
-          <a href="{{ route('services') }}" class="btn bg-accent-orange text-white w-100 shadow-sm">
+          <a href="{{ route('services.index') }}" class="btn bg-accent-orange text-white w-100 shadow-sm">
             <i class="bi bi-cart-plus me-2"></i> Add Service
           </a>
         </div>
         <div class="col-md-4 animate__animated animate__fadeInRight">
-          <a href="{{ route('plans') }}" class="btn bg-accent-orange text-white w-100 shadow-sm">
+          <a href="{{ route('plans.index') }}" class="btn bg-accent-orange text-white w-100 shadow-sm">
             <i class="bi bi-arrow-up-circle me-2"></i> Upgrade Plan
           </a>
         </div>
