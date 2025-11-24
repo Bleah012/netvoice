@@ -16,9 +16,10 @@ use App\Http\Controllers\ContactMessageController;
 // Public static pages
 Route::view('/', 'pages.home')->name('home');
 Route::view('/about', 'pages.about')->name('about');
-Route::get('/contact', fn() => view('pages.contact'))->name('contact'); //  added
+Route::get('/contact', fn() => view('pages.contact'))->name('contact');
+Route::view('/support', 'pages.support')->name('support'); // ✅ added support page route
 
-// Catalog routes (resource controllers)
+// Catalog routes (public resource controllers)
 Route::resource('plans', PlanController::class)->only(['index','show']);
 Route::resource('services', ServiceController::class)->only(['index','show']);
 Route::resource('solutions', SolutionController::class)->only(['index','show']);
@@ -26,8 +27,8 @@ Route::resource('industries', IndustryController::class)->only(['index','show'])
 Route::resource('partners', PartnerController::class)->only(['index','show']);
 
 // Support + contact
-Route::resource('tickets', TicketController::class)->middleware(['auth']);
-Route::resource('contact-messages', ContactMessageController::class)->only(['store']); //  handles POST
+Route::resource('tickets', TicketController::class); 
+Route::resource('contact-messages', ContactMessageController::class)->only(['store']); // public POST form
 
 // Dashboard (admin-only)
 Route::middleware(['auth','admin'])->group(function () {
