@@ -30,15 +30,17 @@ class IndustryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150','unique:industries,name'],
-            'slug' => ['required','string','max:160','unique:industries,slug'],
+            'name'        => ['required','string','max:150','unique:industries,name'],
+            'slug'        => ['required','string','max:160','unique:industries,slug'],
             'description' => ['nullable','string'],
-            'sort_order' => ['integer','min:0'],
+            'sort_order'  => ['integer','min:0'],
         ]);
 
         $industry = Industry::create($data);
 
-        return redirect()->route('industries.show', $industry)->with('status', 'Industry created.');
+        // Use slug in redirect
+        return redirect()->route('industries.show', $industry->slug)
+                         ->with('status', 'Industry created.');
     }
 
     public function edit(Industry $industry)
@@ -49,20 +51,24 @@ class IndustryController extends Controller
     public function update(Request $request, Industry $industry)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150', Rule::unique('industries','name')->ignore($industry->id)],
-            'slug' => ['required','string','max:160', Rule::unique('industries','slug')->ignore($industry->id)],
+            'name'        => ['required','string','max:150', Rule::unique('industries','name')->ignore($industry->id)],
+            'slug'        => ['required','string','max:160', Rule::unique('industries','slug')->ignore($industry->id)],
             'description' => ['nullable','string'],
-            'sort_order' => ['integer','min:0'],
+            'sort_order'  => ['integer','min:0'],
         ]);
 
         $industry->update($data);
 
-        return redirect()->route('industries.show', $industry)->with('status', 'Industry updated.');
+        // Use slug in redirect
+        return redirect()->route('industries.show', $industry->slug)
+                         ->with('status', 'Industry updated.');
     }
 
     public function destroy(Industry $industry)
     {
         $industry->delete();
-        return redirect()->route('industries.index')->with('status', 'Industry deleted.');
+
+        return redirect()->route('industries.index')
+                         ->with('status', 'Industry deleted.');
     }
 }
