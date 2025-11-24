@@ -18,9 +18,12 @@ class Ticket extends Model
         'priority',
         'assigned_to',
         'closed_at',
+        'slug', //  slug for clean URLs
     ];
 
-    // Relationships
+    /**
+     * Relationships
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -34,5 +37,59 @@ class Ticket extends Model
     public function assignedUser()
     {
         return $this->belongsTo(User::class, 'assigned_to');
+    }
+
+    /**
+     * Scopes
+     */
+    public function scopeOpen($query)
+    {
+        return $query->where('status', 'open');
+    }
+
+    public function scopeInProgress($query)
+    {
+        return $query->where('status', 'in_progress');
+    }
+
+    public function scopeResolved($query)
+    {
+        return $query->where('status', 'resolved');
+    }
+
+    public function scopeClosed($query)
+    {
+        return $query->where('status', 'closed');
+    }
+
+    public function scopeHighPriority($query)
+    {
+        return $query->where('priority', 'high');
+    }
+
+    public function scopeUrgent($query)
+    {
+        return $query->where('priority', 'urgent');
+    }
+
+    /**
+     * Route binding: use slug instead of numeric ID.
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Accessors: safe defaults
+     */
+    public function getSubjectAttribute($value)
+    {
+        return $value ?: 'Untitled Ticket';
+    }
+
+    public function getDescriptionAttribute($value)
+    {
+        return $value ?: 'No description provided.';
     }
 }

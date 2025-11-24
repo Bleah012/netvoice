@@ -10,11 +10,11 @@ use Illuminate\Validation\Rule;
 
 class TicketController extends Controller
 {
-    // List tickets (support dashboard)
+    // Support dashboard: list tickets
     public function index()
     {
         $tickets = Ticket::with(['user','client','assignedUser'])
-            ->orderBy('created_at','desc')
+            ->latest()
             ->paginate(20);
 
         return view('pages.tickets.index', compact('tickets'));
@@ -27,11 +27,12 @@ class TicketController extends Controller
         return view('pages.tickets.show', compact('ticket'));
     }
 
-    // Create form
+    // Admin-only create form
     public function create()
     {
         $clients = Client::orderBy('name')->get();
-        $users = User::orderBy('name')->get();
+        $users   = User::orderBy('name')->get();
+
         return view('pages.tickets.create', compact('clients','users'));
     }
 
@@ -39,25 +40,28 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'user_id' => ['nullable','integer','exists:users,id'],
-            'client_id' => ['nullable','integer','exists:clients,id'],
-            'subject' => ['required','string','max:255'],
+            'user_id'     => ['nullable','integer','exists:users,id'],
+            'client_id'   => ['nullable','integer','exists:clients,id'],
+            'subject'     => ['required','string','max:255'],
             'description' => ['required','string'],
-            'status' => ['required','in:open,in_progress,resolved,closed'],
-            'priority' => ['required','in:low,normal,high,urgent'],
+            'status'      => ['required','in:open,in_progress,resolved,closed'],
+            'priority'    => ['required','in:low,normal,high,urgent'],
             'assigned_to' => ['nullable','integer','exists:users,id'],
         ]);
 
         $ticket = Ticket::create($data);
 
-        return redirect()->route('tickets.show', $ticket)->with('status', 'Ticket created.');
+        //Use slug/uuid if model binding is set
+        return redirect()->route('tickets.show', $ticket->slug ?? $ticket->id)
+                         ->with('status', 'Ticket created.');
     }
 
     // Edit form
     public function edit(Ticket $ticket)
     {
         $clients = Client::orderBy('name')->get();
-        $users = User::orderBy('name')->get();
+        $users   = User::orderBy('name')->get();
+
         return view('pages.tickets.edit', compact('ticket','clients','users'));
     }
 
@@ -65,25 +69,29 @@ class TicketController extends Controller
     public function update(Request $request, Ticket $ticket)
     {
         $data = $request->validate([
-            'user_id' => ['nullable','integer','exists:users,id'],
-            'client_id' => ['nullable','integer','exists:clients,id'],
-            'subject' => ['required','string','max:255'],
+            'user_id'     => ['nullable','integer','exists:users,id'],
+            'client_id'   => ['nullable','integer','exists:clients,id'],
+            'subject'     => ['required','string','max:255'],
             'description' => ['required','string'],
-            'status' => ['required','in:open,in_progress,resolved,closed'],
-            'priority' => ['required','in:low,normal,high,urgent'],
+            'status'      => ['required','in:open,in_progress,resolved,closed'],
+            'priority'    => ['required','in:low,normal,high,urgent'],
             'assigned_to' => ['nullable','integer','exists:users,id'],
-            'closed_at' => ['nullable','date'],
+            'closed_at'   => ['nullable','date'],
         ]);
 
         $ticket->update($data);
 
-        return redirect()->route('tickets.show', $ticket)->with('status', 'Ticket updated.');
+        // Use slug/uuid if available
+        return redirect()->route('tickets.show', $ticket->slug ?? $ticket->id)
+                         ->with('status', 'Ticket updated.');
     }
 
     // Delete ticket
     public function destroy(Ticket $ticket)
     {
         $ticket->delete();
-        return redirect()->route('tickets.index')->with('status', 'Ticket deleted.');
+
+        return redirect()->route('tickets.index')
+                         ->with('status', 'Ticket deleted.');
     }
 }
