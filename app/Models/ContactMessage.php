@@ -16,9 +16,12 @@ class ContactMessage extends Model
         'subject',
         'message',
         'status',
+        'slug', // ✅ slug/uuid for clean routing
     ];
 
-    // Scopes
+    /**
+     * Scopes
+     */
     public function scopeNew($query)
     {
         return $query->where('status', 'new');
@@ -27,5 +30,36 @@ class ContactMessage extends Model
     public function scopeReviewed($query)
     {
         return $query->where('status', 'reviewed');
+    }
+
+    public function scopeResponded($query)
+    {
+        return $query->where('status', 'responded');
+    }
+
+    public function scopeArchived($query)
+    {
+        return $query->where('status', 'archived');
+    }
+
+    /**
+     * Route binding: use slug if available
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Accessors: safe defaults
+     */
+    public function getSubjectAttribute($value)
+    {
+        return $value ?: 'No subject provided';
+    }
+
+    public function getMessageAttribute($value)
+    {
+        return $value ?: 'No message content';
     }
 }
