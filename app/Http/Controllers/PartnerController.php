@@ -31,16 +31,18 @@ class PartnerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150','unique:partners,name'],
-            'slug' => ['required','string','max:160','unique:partners,slug'],
+            'name'        => ['required','string','max:150','unique:partners,name'],
+            'slug'        => ['required','string','max:160','unique:partners,slug'],
             'website_url' => ['nullable','url','max:255'],
             'description' => ['nullable','string'],
-            'sort_order' => ['integer','min:0'],
+            'sort_order'  => ['integer','min:0'],
         ]);
 
         $partner = Partner::create($data);
 
-        return redirect()->route('partners.show', $partner)->with('status', 'Partner created.');
+        // Route binding uses slug automatically
+        return redirect()->route('partners.show', $partner->slug)
+                         ->with('status', 'Partner created.');
     }
 
     public function edit(Partner $partner)
@@ -51,21 +53,25 @@ class PartnerController extends Controller
     public function update(Request $request, Partner $partner)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150', Rule::unique('partners','name')->ignore($partner->id)],
-            'slug' => ['required','string','max:160', Rule::unique('partners','slug')->ignore($partner->id)],
+            'name'        => ['required','string','max:150', Rule::unique('partners','name')->ignore($partner->id)],
+            'slug'        => ['required','string','max:160', Rule::unique('partners','slug')->ignore($partner->id)],
             'website_url' => ['nullable','url','max:255'],
             'description' => ['nullable','string'],
-            'sort_order' => ['integer','min:0'],
+            'sort_order'  => ['integer','min:0'],
         ]);
 
         $partner->update($data);
 
-        return redirect()->route('partners.show', $partner)->with('status', 'Partner updated.');
+        // Use slug in redirect
+        return redirect()->route('partners.show', $partner->slug)
+                         ->with('status', 'Partner updated.');
     }
 
     public function destroy(Partner $partner)
     {
         $partner->delete();
-        return redirect()->route('partners.index')->with('status', 'Partner deleted.');
+
+        return redirect()->route('partners.index')
+                         ->with('status', 'Partner deleted.');
     }
 }

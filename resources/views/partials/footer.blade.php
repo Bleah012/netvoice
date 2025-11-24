@@ -18,7 +18,7 @@
         <h6 class="fw-bold">Company</h6>
         <ul class="list-unstyled">
           <li><a class="text-decoration-none text-muted" href="{{ route('about') }}">About Us</a></li>
-          <li><a class="text-decoration-none text-muted" href="{{ route('partners') }}">Partners</a></li>
+          <li><a class="text-decoration-none text-muted" href="{{ route('partners.index') }}">Partners</a></li>
           <li><a class="text-decoration-none text-muted" href="{{ route('contact') }}">Contact</a></li>
         </ul>
       </div>
@@ -26,9 +26,9 @@
       <div class="col-md-3">
         <h6 class="fw-bold">Services</h6>
         <ul class="list-unstyled">
-          <li><a class="text-decoration-none text-muted" href="{{ route('services') }}">ICT Services</a></li>
-          <li><a class="text-decoration-none text-muted" href="{{ route('solutions') }}">Solutions</a></li>
-          <li><a class="text-decoration-none text-muted" href="{{ route('support') }}">Support</a></li>
+          <li><a class="text-decoration-none text-muted" href="{{ route('services.index') }}">ICT Services</a></li>
+          <li><a class="text-decoration-none text-muted" href="{{ route('solutions.index') }}">Solutions</a></li>
+          <li><a class="text-decoration-none text-muted" href="{{ route('tickets.index') }}">Support</a></li>
         </ul>
       </div>
     </div>

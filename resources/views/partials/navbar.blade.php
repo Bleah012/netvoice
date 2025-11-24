@@ -27,34 +27,34 @@
 
         {{-- Company dropdown --}}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-dark {{ request()->routeIs('about') || request()->routeIs('partners') ? 'active fw-bold text-primary-blue' : '' }}" href="#" id="companyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle text-dark {{ request()->routeIs('about') || request()->routeIs('partners.index') ? 'active fw-bold text-primary-blue' : '' }}" href="#" id="companyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Company
           </a>
           <ul class="dropdown-menu" aria-labelledby="companyDropdown">
             <li><a class="dropdown-item" href="{{ route('about') }}">About Us</a></li>
-            <li><a class="dropdown-item" href="{{ route('partners') }}">Partners</a></li>
+            <li><a class="dropdown-item" href="{{ route('partners.index') }}">Partners</a></li>
           </ul>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-dark {{ request()->routeIs('services') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('services') }}">Services</a>
+          <a class="nav-link text-dark {{ request()->routeIs('services.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('services.index') }}">Services</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark {{ request()->routeIs('solutions') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('solutions') }}">Solutions</a>
+          <a class="nav-link text-dark {{ request()->routeIs('solutions.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('solutions.index') }}">Solutions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark {{ request()->routeIs('industries') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('industries') }}">Industries</a>
+          <a class="nav-link text-dark {{ request()->routeIs('industries.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('industries.index') }}">Industries</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark {{ request()->routeIs('support') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('support') }}">Support</a>
+          <a class="nav-link text-dark {{ request()->routeIs('tickets.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('tickets.index') }}">Support</a>
         </li>
 
-        {{-- New Plans tab --}}
+        {{-- Plans tab --}}
         <li class="nav-item">
-          <a class="nav-link text-dark {{ request()->routeIs('plans') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('plans') }}">Plans</a>
+          <a class="nav-link text-dark {{ request()->routeIs('plans.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('plans.index') }}">Plans</a>
         </li>
 
-        {{-- New Dashboard tab --}}
+        {{-- Dashboard tab --}}
         <li class="nav-item">
           <a class="nav-link text-dark {{ request()->routeIs('dashboard') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('dashboard') }}">Dashboard</a>
         </li>
