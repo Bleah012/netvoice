@@ -30,18 +30,18 @@ class PlanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150','unique:plans,name'],
-            'slug' => ['required','string','max:160','unique:plans,slug'],
-            'description' => ['nullable','string'],
-            'price_cents' => ['required','integer','min:0'],
-            'billing_period' => ['required','in:monthly,yearly'],
-            'is_active' => ['boolean'],
-            'sort_order' => ['integer','min:0'],
+            'name'          => ['required','string','max:150','unique:plans,name'],
+            'slug'          => ['required','string','max:160','unique:plans,slug'],
+            'description'   => ['nullable','string'],
+            'price_cents'   => ['required','integer','min:0'],
+            'billing_period'=> ['required','in:monthly,yearly'],
+            'is_active'     => ['boolean'],
+            'sort_order'    => ['integer','min:0'],
         ]);
 
         $plan = Plan::create($data);
 
-        return redirect()->route('plans.show', $plan)->with('status', 'Plan created.');
+        return redirect()->route('plans.show', $plan->slug)->with('status', 'Plan created.');
     }
 
     public function edit(Plan $plan)
@@ -52,18 +52,18 @@ class PlanController extends Controller
     public function update(Request $request, Plan $plan)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150', Rule::unique('plans','name')->ignore($plan->id)],
-            'slug' => ['required','string','max:160', Rule::unique('plans','slug')->ignore($plan->id)],
-            'description' => ['nullable','string'],
-            'price_cents' => ['required','integer','min:0'],
-            'billing_period' => ['required','in:monthly,yearly'],
-            'is_active' => ['boolean'],
-            'sort_order' => ['integer','min:0'],
+            'name'          => ['required','string','max:150', Rule::unique('plans','name')->ignore($plan->id)],
+            'slug'          => ['required','string','max:160', Rule::unique('plans','slug')->ignore($plan->id)],
+            'description'   => ['nullable','string'],
+            'price_cents'   => ['required','integer','min:0'],
+            'billing_period'=> ['required','in:monthly,yearly'],
+            'is_active'     => ['boolean'],
+            'sort_order'    => ['integer','min:0'],
         ]);
 
         $plan->update($data);
 
-        return redirect()->route('plans.show', $plan)->with('status', 'Plan updated.');
+        return redirect()->route('plans.show', $plan->slug)->with('status', 'Plan updated.');
     }
 
     public function destroy(Plan $plan)
