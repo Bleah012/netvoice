@@ -30,17 +30,19 @@ class SolutionController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150','unique:solutions,name'],
-            'slug' => ['required','string','max:160','unique:solutions,slug'],
-            'summary' => ['nullable','string','max:255'],
-            'body' => ['nullable','string'],
-            'is_active' => ['boolean'],
+            'name'       => ['required','string','max:150','unique:solutions,name'],
+            'slug'       => ['required','string','max:160','unique:solutions,slug'],
+            'summary'    => ['nullable','string','max:255'],
+            'body'       => ['nullable','string'],
+            'is_active'  => ['boolean'],
             'sort_order' => ['integer','min:0'],
         ]);
 
         $solution = Solution::create($data);
 
-        return redirect()->route('solutions.show', $solution)->with('status', 'Solution created.');
+        // Use slug in redirect
+        return redirect()->route('solutions.show', $solution->slug)
+                         ->with('status', 'Solution created.');
     }
 
     public function edit(Solution $solution)
@@ -51,22 +53,26 @@ class SolutionController extends Controller
     public function update(Request $request, Solution $solution)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150', Rule::unique('solutions','name')->ignore($solution->id)],
-            'slug' => ['required','string','max:160', Rule::unique('solutions','slug')->ignore($solution->id)],
-            'summary' => ['nullable','string','max:255'],
-            'body' => ['nullable','string'],
-            'is_active' => ['boolean'],
+            'name'       => ['required','string','max:150', Rule::unique('solutions','name')->ignore($solution->id)],
+            'slug'       => ['required','string','max:160', Rule::unique('solutions','slug')->ignore($solution->id)],
+            'summary'    => ['nullable','string','max:255'],
+            'body'       => ['nullable','string'],
+            'is_active'  => ['boolean'],
             'sort_order' => ['integer','min:0'],
         ]);
 
         $solution->update($data);
 
-        return redirect()->route('solutions.show', $solution)->with('status', 'Solution updated.');
+        // Use slug in redirect
+        return redirect()->route('solutions.show', $solution->slug)
+                         ->with('status', 'Solution updated.');
     }
 
     public function destroy(Solution $solution)
     {
         $solution->delete();
-        return redirect()->route('solutions.index')->with('status', 'Solution deleted.');
+
+        return redirect()->route('solutions.index')
+                         ->with('status', 'Solution deleted.');
     }
 }
