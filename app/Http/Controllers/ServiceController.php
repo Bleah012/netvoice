@@ -30,17 +30,19 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150','unique:services,name'],
-            'slug' => ['required','string','max:160','unique:services,slug'],
-            'summary' => ['nullable','string','max:255'],
-            'body' => ['nullable','string'],
-            'is_active' => ['boolean'],
+            'name'       => ['required','string','max:150','unique:services,name'],
+            'slug'       => ['required','string','max:160','unique:services,slug'],
+            'summary'    => ['nullable','string','max:255'],
+            'body'       => ['nullable','string'],
+            'is_active'  => ['boolean'],
             'sort_order' => ['integer','min:0'],
         ]);
 
         $service = Service::create($data);
 
-        return redirect()->route('services.show', $service)->with('status', 'Service created.');
+        // Use slug in redirect
+        return redirect()->route('services.show', $service->slug)
+                         ->with('status', 'Service created.');
     }
 
     public function edit(Service $service)
@@ -51,22 +53,26 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:150', Rule::unique('services','name')->ignore($service->id)],
-            'slug' => ['required','string','max:160', Rule::unique('services','slug')->ignore($service->id)],
-            'summary' => ['nullable','string','max:255'],
-            'body' => ['nullable','string'],
-            'is_active' => ['boolean'],
+            'name'       => ['required','string','max:150', Rule::unique('services','name')->ignore($service->id)],
+            'slug'       => ['required','string','max:160', Rule::unique('services','slug')->ignore($service->id)],
+            'summary'    => ['nullable','string','max:255'],
+            'body'       => ['nullable','string'],
+            'is_active'  => ['boolean'],
             'sort_order' => ['integer','min:0'],
         ]);
 
         $service->update($data);
 
-        return redirect()->route('services.show', $service)->with('status', 'Service updated.');
+        // Use slug in redirect
+        return redirect()->route('services.show', $service->slug)
+                         ->with('status', 'Service updated.');
     }
 
     public function destroy(Service $service)
     {
         $service->delete();
-        return redirect()->route('services.index')->with('status', 'Service deleted.');
+
+        return redirect()->route('services.index')
+                         ->with('status', 'Service deleted.');
     }
 }
