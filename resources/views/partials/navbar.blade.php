@@ -21,6 +21,7 @@
     {{-- Links --}}
     <div class="collapse navbar-collapse" id="nvNavbar">
       <ul class="navbar-nav ms-auto align-items-md-center">
+        {{-- Home --}}
         <li class="nav-item">
           <a class="nav-link text-dark {{ request()->routeIs('home') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('home') }}">Home</a>
         </li>
@@ -36,6 +37,7 @@
           </ul>
         </li>
 
+        {{-- Catalog --}}
         <li class="nav-item">
           <a class="nav-link text-dark {{ request()->routeIs('services.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('services.index') }}">Services</a>
         </li>
@@ -46,12 +48,18 @@
           <a class="nav-link text-dark {{ request()->routeIs('industries.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('industries.index') }}">Industries</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark {{ request()->routeIs('tickets.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('tickets.index') }}">Support</a>
+          <a class="nav-link text-dark {{ request()->routeIs('plans.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('plans.index') }}">Plans</a>
         </li>
 
-        {{-- Plans tab --}}
-        <li class="nav-item">
-          <a class="nav-link text-dark {{ request()->routeIs('plans.index') ? 'active fw-bold text-primary-blue' : '' }}" href="{{ route('plans.index') }}">Plans</a>
+        {{-- Support dropdown --}}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark {{ request()->routeIs('support') || request()->routeIs('tickets.index') ? 'active fw-bold text-primary-blue' : '' }}" href="#" id="supportDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Support
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="supportDropdown">
+            <li><a class="dropdown-item" href="{{ route('support') }}">Support Overview</a></li>
+            <li><a class="dropdown-item" href="{{ route('tickets.index') }}">Tickets</a></li>
+          </ul>
         </li>
 
         {{-- Dashboard tab --}}
