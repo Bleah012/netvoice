@@ -64,25 +64,34 @@
     </div>
   </section>
 
-    {{-- Support Form --}}
+  {{-- Support Form --}}
   <section class="py-5 bg-white">
     <div class="container">
       <h2 class="text-center mb-4">Request Support</h2>
       <p class="text-muted text-center mb-5">Fill out the form below and our team will get back to you promptly.</p>
       <div class="row justify-content-center">
         <div class="col-lg-8">
-          <form class="p-4 bg-light rounded shadow-sm">
+          <form action="{{ route('contact-messages.store') }}" method="POST" class="p-4 bg-light rounded shadow-sm">
+            @csrf
             <div class="mb-3">
-              <label for="name" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Enter your name">
+              <label for="name" class="form-label fw-bold">Full Name</label>
+              <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" required>
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+              <label for="email" class="form-label fw-bold">Email Address</label>
+              <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
             </div>
             <div class="mb-3">
-              <label for="issue" class="form-label">Issue Description</label>
-              <textarea class="form-control" id="issue" rows="4" placeholder="Describe your issue"></textarea>
+              <label for="phone" class="form-label fw-bold">Phone Number</label>
+              <input type="text" name="phone" class="form-control" id="phone" placeholder="Optional">
+            </div>
+            <div class="mb-3">
+              <label for="subject" class="form-label fw-bold">Subject</label>
+              <input type="text" name="subject" class="form-control" id="subject" placeholder="Enter subject" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label fw-bold">Issue Description</label>
+              <textarea name="message" class="form-control" id="message" rows="4" placeholder="Describe your issue" required></textarea>
             </div>
             <button type="submit" class="btn bg-accent-orange text-white">Submit Request</button>
           </form>
@@ -90,7 +99,6 @@
       </div>
     </div>
   </section>
-
   {{-- Features Section --}}
   <section class="py-5 bg-light">
     <div class="container text-center">
