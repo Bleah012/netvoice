@@ -34,10 +34,8 @@ Route::resource('contact-messages', ContactMessageController::class)->only(['sto
 // Dashboard (now dynamic via controller)
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// Admin-only resources (wrap in middleware once auth is ready)
-Route::middleware(['auth','admin'])->group(function () {
-    Route::resource('clients', ClientController::class);
-    Route::resource('projects', ProjectController::class);
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-});
+// Admin resources (temporarily public until auth scaffolding is added)
+Route::resource('clients', ClientController::class);
+Route::resource('projects', ProjectController::class);
+Route::resource('roles', RoleController::class);
+Route::resource('users', UserController::class);
