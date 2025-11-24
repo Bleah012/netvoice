@@ -18,7 +18,7 @@ class Ticket extends Model
         'priority',
         'assigned_to',
         'closed_at',
-        'slug', //  slug for clean URLs
+        // 'slug', // ❌ removed for now — no slug column in DB
     ];
 
     /**
@@ -70,14 +70,6 @@ class Ticket extends Model
     public function scopeUrgent($query)
     {
         return $query->where('priority', 'urgent');
-    }
-
-    /**
-     * Route binding: use slug instead of numeric ID.
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 
     /**
