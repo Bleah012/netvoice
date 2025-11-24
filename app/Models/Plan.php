@@ -25,6 +25,16 @@ class Plan extends Model
         return $this->price_cents / 100;
     }
 
+    public function getDescriptionAttribute($value): string
+    {
+        return $value ?: 'No description provided.';
+    }
+
+    public function getBillingPeriodAttribute($value): string
+    {
+        return ucfirst($value ?: 'monthly');
+    }
+
     // Scopes
     public function scopeActive($query)
     {
@@ -34,5 +44,11 @@ class Plan extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('sort_order');
+    }
+
+    // Route binding
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
