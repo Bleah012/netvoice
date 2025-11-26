@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class ContactMessage extends Model
 {
@@ -16,12 +17,20 @@ class ContactMessage extends Model
         'subject',
         'message',
         'status',
-        'slug', // ✅ slug/uuid for clean routing
+        'slug',
     ];
 
-    /**
-     * Scopes
-     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($msg) {
+            if (empty($msg->slug)) {
+                $msg->slug = Str::uuid();
+            }
+        });
+    }
+
     public function scopeNew($query)
     {
         return $query->where('status', 'new');
@@ -42,17 +51,11 @@ class ContactMessage extends Model
         return $query->where('status', 'archived');
     }
 
-    /**
-     * Route binding: use slug if available
-     */
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    /**
-     * Accessors: safe defaults
-     */
     public function getSubjectAttribute($value)
     {
         return $value ?: 'No subject provided';
