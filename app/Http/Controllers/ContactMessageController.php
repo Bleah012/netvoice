@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ContactMessageController extends Controller
 {
@@ -22,6 +23,9 @@ class ContactMessageController extends Controller
 
         // Default status for new messages
         $data['status'] = 'new';
+
+        // Generate a unique slug based on subject + timestamp
+        $data['slug'] = Str::slug($data['subject'] . '-' . now()->timestamp);
 
         $contactMessage = ContactMessage::create($data);
 
@@ -57,8 +61,7 @@ class ContactMessageController extends Controller
 
         $contactMessage->update($data);
 
-        // Use slug if model binding is set
-        return redirect()->route('contact-messages.show', $contactMessage->slug ?? $contactMessage->id)
+        return redirect()->route('contact-messages.show', $contactMessage)
                          ->with('status', 'Message status updated.');
     }
 
