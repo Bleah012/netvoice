@@ -12,7 +12,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ContactMessageController;
-use App\Http\Controllers\DashboardController; 
+use App\Http\Controllers\DashboardController;
 
 // Public static pages
 Route::view('/', 'pages.home')->name('home');
@@ -28,14 +28,18 @@ Route::resource('industries', IndustryController::class)->only(['index','show'])
 Route::resource('partners', PartnerController::class)->only(['index','show']);
 
 // Support + contact
-Route::resource('tickets', TicketController::class); 
-Route::resource('contact-messages', ContactMessageController::class)->only(['store']);
+Route::resource('tickets', TicketController::class);
 
-// Dashboard (now dynamic via controller)
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Contact messages
+// Public: only store from contact form
+Route::post('contact-messages', [ContactMessageController::class, 'store'])->name('contact-messages.store');
 
 // Admin resources (temporarily public until auth scaffolding is added)
+Route::resource('contact-messages', ContactMessageController::class)->except(['store']);
 Route::resource('clients', ClientController::class);
 Route::resource('projects', ProjectController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
+
+// Dashboard (temporarily public until auth scaffolding is added)
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
