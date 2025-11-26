@@ -52,4 +52,28 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    /**
+     * Check if user has a specific role
+     */
+    public function hasRole(string $roleName): bool
+    {
+        return $this->roles()->where('name', $roleName)->exists();
+    }
+
+    /**
+     * Check if user is an admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    /**
+     * Assign a role to the user
+     */
+    public function assignRole(Role $role): void
+    {
+        $this->roles()->syncWithoutDetaching([$role->id]);
+    }
 }
