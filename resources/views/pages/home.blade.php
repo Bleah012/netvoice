@@ -6,17 +6,22 @@
   {{-- Hero Section --}}
   <section class="bg-primary-blue text-white py-5 position-relative overflow-hidden">
     <div class="container text-center">
-      <h1 class="mb-3 animate__animated animate__fadeInDown">Reliable & Affordable ICT Solutions</h1>
-      <p class="lead text-gray-200 animate__animated animate__fadeInUp">
+      <h1 class="mb-3 animate__animated animate__fadeInDown">
+        Reliable & Affordable ICT Solutions
+      </h1>
+      <p class="lead text-light animate__animated animate__fadeInUp">
         Empowering businesses with cutting-edge technology and unmatched support
       </p>
-      <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white mt-3 animate__animated animate__slideInLeft">
+      <a href="{{ route('contact') }}" 
+         class="btn btn-lg bg-accent-orange text-white mt-3 animate__animated animate__slideInLeft">
         Get Started
       </a>
     </div>
     {{-- Background cabling photo --}}
     <div class="hero-bg position-absolute top-0 start-0 w-100 h-100 opacity-25">
-      <img src="{{ asset('images/clients/server3.jpeg') }}" class="w-100 h-100 object-fit-cover" alt="Server 3 Infrastructure">
+      <img src="{{ asset('images/clients/server3.jpeg') }}" 
+           class="w-100 h-100 object-fit-cover" 
+           alt="Server infrastructure cabling">
     </div>
   </section>
 
@@ -24,8 +29,12 @@
   <section class="py-5 bg-white text-center">
     <div class="container">
       <h2 class="mb-4">Meet the NetVoice Team</h2>
-      <img src="{{ asset('images/clients/IMG_20161028_162144.jpg') }}" class="img-fluid rounded shadow animate__animated animate__zoomIn" alt="Our Company Team A">
-      <p class="mt-3 text-muted">Our dedicated professionals ensure seamless communication solutions for your business.</p>
+      <img src="{{ asset('images/clients/IMG_20161028_162144.jpg') }}" 
+           class="img-fluid rounded shadow animate__animated animate__zoomIn" 
+           alt="NetVoice Team">
+      <p class="mt-3 text-muted">
+        Our dedicated professionals ensure seamless communication solutions for your business.
+      </p>
     </div>
   </section>
 
@@ -33,14 +42,18 @@
   <section class="py-5 bg-light">
     <div class="container text-center">
       <h2 class="mb-4">Our Core Services</h2>
-      <p class="text-muted mb-5">Comprehensive ICT solutions tailored to your business needs</p>
+      <p class="text-muted mb-5">
+        Comprehensive ICT solutions tailored to your business needs
+      </p>
 
       <div class="row g-4">
         <div class="col-md-4 animate__animated animate__fadeInLeft">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
               <h5 class="card-title text-primary-blue">Networking</h5>
-              <p class="card-text text-muted">Enterprise-grade LAN/WAN setup, routers, switches, and wireless infrastructure.</p>
+              <p class="card-text text-muted">
+                Enterprise-grade LAN/WAN setup, routers, switches, and wireless infrastructure.
+              </p>
             </div>
           </div>
         </div>
@@ -49,7 +62,9 @@
           <div class="card h-100 shadow-sm">
             <div class="card-body">
               <h5 class="card-title text-primary-blue">Security</h5>
-              <p class="card-text text-muted">CCTV, surveillance, and access control systems for complete protection.</p>
+              <p class="card-text text-muted">
+                CCTV, surveillance, and access control systems for complete protection.
+              </p>
             </div>
           </div>
         </div>
@@ -58,7 +73,9 @@
           <div class="card h-100 shadow-sm">
             <div class="card-body">
               <h5 class="card-title text-primary-blue">Support</h5>
-              <p class="card-text text-muted">24/7 technical support, preventive maintenance, and system upgrades.</p>
+              <p class="card-text text-muted">
+                24/7 technical support, preventive maintenance, and system upgrades.
+              </p>
             </div>
           </div>
         </div>
@@ -72,10 +89,14 @@
       <h2 class="text-center mb-5">Our Infrastructure</h2>
       <div class="row align-items-center">
         <div class="col-md-6 animate__animated animate__fadeInLeft">
-          <img src="{{ asset('images/clients/server1.jpeg') }}" class="img-fluid rounded shadow" alt="Server 1 Infrastructure">
+          <img src="{{ asset('images/clients/server1.jpeg') }}" 
+               class="img-fluid rounded shadow" 
+               alt="Server infrastructure">
         </div>
         <div class="col-md-6 animate__animated animate__fadeInRight">
-          <p class="lead text-muted">We deploy robust cabling systems that ensure high-speed, reliable connectivity across your premises.</p>
+          <p class="lead text-muted">
+            We deploy robust cabling systems that ensure high-speed, reliable connectivity across your premises.
+          </p>
         </div>
       </div>
     </div>
@@ -88,13 +109,19 @@
       <div id="serverCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-           <img src="{{ asset('images/clients/server1.jpeg') }}" class="d-block w-100" alt="Server 1 Infrastructure">
+            <img src="{{ asset('images/clients/server1.jpeg') }}" 
+                 class="d-block w-100" 
+                 alt="Server 1 Infrastructure">
           </div>
           <div class="carousel-item">
-            <img src="{{ asset('images/clients/server2.jpeg') }}" class="d-block w-100" alt="Server 2 Infrastructure">
+            <img src="{{ asset('images/clients/server2.jpeg') }}" 
+                 class="d-block w-100" 
+                 alt="Server 2 Infrastructure">
           </div>
           <div class="carousel-item">
-            <img src="{{ asset('images/clients/server3.jpeg') }}" class="d-block w-100" alt="Server 3 Infrastructure">
+            <img src="{{ asset('images/clients/server3.jpeg') }}" 
+                 class="d-block w-100" 
+                 alt="Server 3 Infrastructure">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#serverCarousel" data-bs-slide="prev">
@@ -138,10 +165,11 @@
   <section class="py-5 bg-primary-blue text-white text-center">
     <div class="container">
       <h2 class="mb-3 animate__animated animate__fadeInUp">Is Your Industry Listed?</h2>
-      <p class="lead text-gray-200 mb-4 animate__animated animate__fadeInUp">
+      <p class="lead text-light mb-4 animate__animated animate__fadeInUp">
         Even if your sector isn't mentioned, our versatile team can create customized solutions.
       </p>
-      <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white animate__animated animate__pulse">
+      <a href="{{ route('contact') }}" 
+         class="btn btn-lg bg-accent-orange text-white animate__animated animate__pulse">
         Contact Our Team
       </a>
     </div>
