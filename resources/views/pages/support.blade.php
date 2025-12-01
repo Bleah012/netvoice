@@ -3,174 +3,97 @@
 
 @section('content')
 
-  {{-- Hero Section --}}
-  <section class="bg-primary-blue text-white py-5">
-    <div class="container">
-      <div class="col-lg-8">
-        <h1 class="mb-3 animate__animated animate__fadeInDown">Customer Support</h1>
-        <p class="lead text-gray-200 animate__animated animate__fadeInUp">
-          Reliable, responsive, and round-the-clock support to keep your business running smoothly.
+{{-- Hero Section --}}
+<section class="py-5 text-white" style="background: linear-gradient(to right, #002366, #00C853);">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8" data-aos="fade-down">
+        <h1 class="mb-3 animate__animated animate__fadeInDown">Support & Maintenance</h1>
+        <p class="lead animate__animated animate__fadeInUp">
+          Keep your IT infrastructure running smoothly with our comprehensive support and maintenance services.
         </p>
+        <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white fw-bold mt-3 animate__animated animate__pulse">
+          We respond within 2 business hours
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  {{-- Support Options Overview --}}
-  <section class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="mb-4">Our Support Services</h2>
-      <p class="text-muted mb-5">Comprehensive support options designed to meet your business needs.</p>
+{{-- Support Services --}}
+<section class="py-5 bg-white">
+  <div class="container text-center">
+    <h2 class="mb-4" data-aos="fade-up">Support Services</h2>
+    <p class="text-muted mb-5" data-aos="fade-up" data-aos-delay="100">
+      Our comprehensive support ensures your business stays connected and productive.
+    </p>
+    <div class="row g-4">
+      @php
+        $services = [
+          ['icon' => 'headphones', 'title' => '24/7 Help Desk', 'desc' => 'Get support anytime with our around-the-clock help desk services.'],
+          ['icon' => 'monitor', 'title' => 'Remote Monitoring', 'desc' => 'Ensure your systems are always up and running with proactive monitoring.'],
+          ['icon' => 'shield-check', 'title' => 'Annual Network Audits', 'desc' => 'Identify potential issues and optimize performance with yearly audits.'],
+          ['icon' => 'wrench', 'title' => 'Preventive Maintenance', 'desc' => 'Avoid downtime with regular maintenance and updates.'],
+        ];
+      @endphp
 
-      <div class="row g-4">
-        {{-- Technical Support --}}
-        <div class="col-md-4 animate__animated animate__fadeInLeft">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3" style="width:60px;height:60px;">
-                <i class="bi bi-headset fs-3"></i>
-              </div>
-              <h5 class="card-title text-primary-blue">Technical Support</h5>
-              <p class="text-muted">24/7 assistance for troubleshooting, system upgrades, and preventive maintenance.</p>
+      @foreach($services as $index => $service)
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+              <i data-lucide="{{ $service['icon'] }}" class="text-accent-orange mb-3" style="width:32px;height:32px;"></i>
+              <h5 class="card-title text-primary-blue">{{ $service['title'] }}</h5>
+              <p class="text-muted small">{{ $service['desc'] }}</p>
             </div>
           </div>
         </div>
+      @endforeach
+    </div>
+  </div>
+</section>
 
-        {{-- Monitoring --}}
-        <div class="col-md-4 animate__animated animate__fadeInUp">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3" style="width:60px;height:60px;">
-                <i class="bi bi-activity fs-3"></i>
-              </div>
-              <h5 class="card-title text-primary-blue">System Monitoring</h5>
-              <p class="text-muted">Real-time monitoring to ensure uptime, performance, and proactive issue resolution.</p>
-            </div>
+{{-- Contact Options --}}
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center">
+      {{-- Emergency Contact --}}
+      <div class="col-md-6" data-aos="fade-right">
+        <div class="bg-accent-orange text-white p-4 rounded shadow-sm h-100">
+          <h4 class="fw-bold">Need Urgent IT Help?</h4>
+          <p class="mb-3">Our emergency support team is ready to assist you 24/7.</p>
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-telephone-fill fs-4"></i>
+            <a href="tel:0723639338" class="text-white fw-bold text-decoration-none">Call 0723 639338 Now</a>
           </div>
-        </div>
-
-        {{-- Consultation --}}
-        <div class="col-md-4 animate__animated animate__fadeInRight">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3" style="width:60px;height:60px;">
-                <i class="bi bi-person-lines-fill fs-3"></i>
-              </div>
-              <h5 class="card-title text-primary-blue">Consultation</h5>
-              <p class="text-muted">Expert guidance to optimize ICT infrastructure and align with your business goals.</p>
-            </div>
-          </div>
+          <a href="{{ route('contact') }}" class="btn btn-light text-accent-orange mt-3 fw-bold">
+            Request Support
+          </a>
         </div>
       </div>
-    </div>
-  </section>
 
-  {{-- Support Form --}}
-  <section class="py-5 bg-white">
-    <div class="container">
-      <h2 class="text-center mb-4">Request Support</h2>
-      <p class="text-muted text-center mb-5">Fill out the form below and our team will get back to you promptly.</p>
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <form action="{{ route('contact-messages.store') }}" method="POST" class="p-4 bg-light rounded shadow-sm">
-            @csrf
-            <div class="mb-3">
-              <label for="name" class="form-label fw-bold">Full Name</label>
-              <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label fw-bold">Email Address</label>
-              <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
-            </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label fw-bold">Phone Number</label>
-              <input type="text" name="phone" class="form-control" id="phone" placeholder="Optional">
-            </div>
-            <div class="mb-3">
-              <label for="subject" class="form-label fw-bold">Subject</label>
-              <input type="text" name="subject" class="form-control" id="subject" placeholder="Enter subject" required>
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label fw-bold">Issue Description</label>
-              <textarea name="message" class="form-control" id="message" rows="4" placeholder="Describe your issue" required></textarea>
-            </div>
-            <button type="submit" class="btn bg-accent-orange text-white">Submit Request</button>
-          </form>
+      {{-- WhatsApp Support --}}
+      <div class="col-md-6 mt-4 mt-md-0" data-aos="fade-left">
+        <div class="p-4 bg-light rounded shadow-sm h-100 text-center text-md-start">
+          <h4 class="fw-bold text-primary-blue">Have Questions?</h4>
+          <p class="text-muted">Connect with our support team via WhatsApp for quick answers to your technical questions.</p>
+          <a href="https://wa.me/254723639338" target="_blank" class="btn btn-success fw-bold">
+            <i class="bi bi-whatsapp me-2"></i> Chat on WhatsApp
+          </a>
         </div>
       </div>
     </div>
-  </section>
-  {{-- Features Section --}}
-  <section class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="mb-4">Why Choose Our Support?</h2>
-      <div class="row g-4">
-        <div class="col-md-4 animate__animated animate__fadeInLeft">
-          <i class="bi bi-clock-history fs-1 text-accent-orange mb-3"></i>
-          <h5>24/7 Availability</h5>
-          <p class="text-muted">Round-the-clock support to ensure your systems are always operational.</p>
-        </div>
-        <div class="col-md-4 animate__animated animate__fadeInUp">
-          <i class="bi bi-lightning-charge fs-1 text-accent-orange mb-3"></i>
-          <h5>Fast Response</h5>
-          <p class="text-muted">Quick turnaround times to minimize downtime and keep your business running.</p>
-        </div>
-        <div class="col-md-4 animate__animated animate__fadeInRight">
-          <i class="bi bi-shield-check fs-1 text-accent-orange mb-3"></i>
-          <h5>Trusted Expertise</h5>
-          <p class="text-muted">Experienced professionals delivering reliable solutions for complex ICT challenges.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  {{-- Plans Overview --}}
-  <section class="py-5 bg-white">
-    <div class="container text-center">
-      <h2 class="mb-4">Support Plans</h2>
-      <p class="text-muted mb-5">Choose a plan that fits your business needs.</p>
-      <div class="row g-4">
-        <div class="col-md-4 animate__animated animate__fadeInLeft">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title text-primary-blue">Basic Plan</h5>
-              <p class="text-muted">Email support, scheduled maintenance, and system health checks.</p>
-              <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white mt-3">Select Plan</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 animate__animated animate__fadeInUp">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title text-primary-blue">Standard Plan</h5>
-              <p class="text-muted">Phone support, proactive monitoring, and priority issue resolution.</p>
-              <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white mt-3">Select Plan</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 animate__animated animate__fadeInRight">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title text-primary-blue">Premium Plan</h5>
-              <p class="text-muted">Dedicated account manager, on-site support, and advanced system optimization.</p>
-              <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white mt-3">Select Plan</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {{-- CTA Section --}}
-  <section class="py-5 bg-primary-blue text-white text-center">
-    <div class="container">
-      <h2 class="mb-3 animate__animated animate__fadeInUp">Need Immediate Assistance?</h2>
-      <p class="lead text-gray-200 mb-4 animate__animated animate__fadeInUp">
-        Contact our support team today and experience reliable, responsive service tailored to your needs.
-      </p>
-      <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white animate__animated animate__pulse">
-        Get Support Now
-      </a>
-    </div>
-  </section>
+{{-- CTA Section --}}
+<section class="py-5 text-white" style="background: linear-gradient(to right, #002366, #00C853);">
+  <div class="container text-center" data-aos="fade-up">
+    <h2 class="mb-3">Ready to Secure Your IT Infrastructure?</h2>
+    <p class="lead mb-4">Let Netvoice Systems handle your support and maintenance with precision and care.</p>
+    <a href="{{ route('contact') }}" class="btn bg-white text-primary-blue fw-bold px-4 py-2">
+      Request a Free Consultation
+    </a>
+  </div>
+</section>
 
 @endsection

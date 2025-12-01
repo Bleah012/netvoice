@@ -1,23 +1,26 @@
 @extends('layouts.app')
+@section('title', $service->name)
 
 @section('content')
-<section class="py-5 bg-light">
+
+{{-- Hero --}}
+<section class="py-5 text-white" style="background: linear-gradient(to right, #002366, #00C853);">
   <div class="container">
-    <h1 class="mb-4 text-primary-blue fw-bold">{{ $service->name }}</h1>
+    <h1 class="fw-bold mb-2">{{ $service->hero_heading ?? $service->name }}</h1>
+    <p class="lead">{{ $service->hero_subheading ?? 'Comprehensive ICT solutions for your enterprise.' }}</p>
+  </div>
+</section>
 
-    @if(!empty($service->summary))
-      <p class="text-muted fs-5">{{ $service->summary }}</p>
-    @endif
+{{-- Detail --}}
+<section class="py-5 bg-white">
+  <div class="container">
+    @include('pages.services.partials.detail', ['service' => $service])
 
-    @if(!empty($service->body))
-      <div class="mt-3">
-        {!! nl2br(e($service->body)) !!}
-      </div>
-    @endif
-
-    <div class="mt-4">
+    <div class="mt-4 d-flex justify-content-between">
       <a href="{{ route('services.index') }}" class="btn btn-outline-secondary">← Back to services</a>
+      <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white">Start your project</a>
     </div>
   </div>
 </section>
+
 @endsection

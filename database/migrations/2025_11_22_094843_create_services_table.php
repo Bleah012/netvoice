@@ -11,12 +11,19 @@ return new class extends Migration {
             $table->id();
 
             // Canonical identifiers
-            $table->string('name')->unique();       // e.g. "Cloud Hosting"
-            $table->string('slug')->unique();       // URL-friendly identifier
+            $table->string('name', 150)->unique();   // e.g. "Cloud Hosting"
+            $table->string('slug', 160)->unique();   // URL-friendly identifier
 
             // Content
-            $table->string('summary')->nullable();  // short tagline
-            $table->longText('body')->nullable();   // detailed description
+            $table->string('summary', 255)->nullable();       // short tagline
+            $table->longText('body')->nullable();             // detailed description
+            $table->string('hero_heading', 255)->nullable();  // page hero title
+            $table->string('hero_subheading', 255)->nullable(); // page hero subtitle
+
+            // Structured arrays (JSON)
+            $table->json('features')->nullable();        // key features list
+            $table->json('process_steps')->nullable();   // implementation steps
+            $table->json('partners')->nullable();        // trusted vendors
 
             // Status and ordering
             $table->boolean('is_active')->default(true)->index();

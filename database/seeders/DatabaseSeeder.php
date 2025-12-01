@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\{User, Role, Plan, Service, Solution, Industry, Partner, Client, Project, Ticket, ContactMessage};
+use App\Models\{
+    User, Role, Plan, Service, Solution, Industry, Partner, Client, Project, Ticket, ContactMessage
+};
 
 class DatabaseSeeder extends Seeder
 {
@@ -113,7 +115,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Clients + Projects
+        // Clients + Projects (sample)
         $client = Client::firstOrCreate(
             ['slug' => 'acme'],
             [
@@ -155,5 +157,10 @@ class DatabaseSeeder extends Seeder
                 'status' => 'new',
             ]
         );
+
+        // 🔹 Register custom seeders
+        $this->call([
+            ProjectSeeder::class,   // seeds your real projects with fallback images
+        ]);
     }
 }

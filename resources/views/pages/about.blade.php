@@ -3,189 +3,175 @@
 
 @section('content')
 
-  {{-- Hero Section --}}
-  <section class="bg-primary-blue text-white py-5">
-    <div class="container">
-      <div class="col-lg-8">
-        <h1 class="mb-3 animate__animated animate__fadeInDown">About NetVoice Systems</h1>
-        <p class="lead text-gray-200 animate__animated animate__fadeInUp">
-          Established in 2013, NetVoice Systems Engineering Ltd is an indigenous Kenyan ICT company
-          committed to delivering reliable, affordable, and future-ready networking and telecommunication solutions.
+{{-- Hero Section --}}
+<section class="py-5" style="background: linear-gradient(to right, #002366, #00C853); color: #fff;">
+  <div class="container text-center" data-aos="fade-down">
+    <h1 class="mb-3 animate__animated animate__fadeInDown">About Netvoice Systems</h1>
+    <p class="lead animate__animated animate__fadeInUp">
+      Indigenous Kenyan expertise delivering top-class ICT and automation solutions since 2013.
+    </p>
+  </div>
+</section>
+
+{{-- Our Story --}}
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h2 class="text-primary mb-4">Our Story</h2>
+        <p class="text-muted mb-3">
+          Netvoice Systems Engineering Ltd was registered in August 2013 and launched into the telecommunication world by a team of indigenous Kenyan technicians poached from leading ICT firms across East Africa. Driven by a shared desire to offer quality and timely service, the directors—locally and internationally trained—understand the evolving needs of customers and the importance of building wealth through technology.
         </p>
+        <p class="text-muted mb-4">
+          Our commitment is to survey, design, implement, and support ICT and automation systems with integrity and high standards. We believe in continuous learning and strive to make a meaningful difference in every enterprise we serve.
+        </p>
+        <ul class="list-unstyled text-muted">
+          @foreach([
+            'Founded in August 2013',
+            'Indigenous Kenyan leadership',
+            'Locally and internationally trained technicians',
+            'Committed to quality and timely service',
+            'Serving 200+ enterprises across East Africa',
+            'Specializing in ICT and office automation'
+          ] as $point)
+            <li class="d-flex align-items-center mb-2">
+              <i data-lucide="check-circle-2" class="text-success me-2 w-4 h-4"></i> {{ $point }}
+            </li>
+          @endforeach
+        </ul>
+      </div>
+
+      {{-- HQ Image onboarded into public/images/clients --}}
+      <div class="col-lg-6" data-aos="fade-left">
+        <img src="{{ asset('images/clients/netvoice_building.jpg') }}"
+             alt="Netvoice HQ"
+             class="img-fluid rounded shadow"
+             style="height:500px;object-fit:cover;width:100%;"
+             loading="lazy">
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  {{-- Company Overview --}}
-  <section class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="mb-4">Company Overview</h2>
-      <p class="text-muted mb-5">
-        NetVoice Systems Engineering Ltd was founded by locally and internationally trained directors
-        with extensive experience in Kenya’s telecommunication industry. Our focus is on survey, design,
-        implementation, and after-sales service — all delivered with integrity and high-quality standards.
-      </p>
-
-      <div class="row g-4">
-        {{-- Introduction --}}
-        <div class="col-md-6 animate__animated animate__fadeInLeft">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3"
-                   style="width:60px;height:60px;">
-                <i class="bi bi-journal-text fs-3"></i>
-              </div>
-              <h5 class="card-title text-primary-blue">Introduction</h5>
-              <p class="text-muted">
-                Founded in August 2013, NetVoice Systems Engineering Ltd emerged with a vision to provide
-                top-class ICT and office automation solutions across Kenya and East Africa.
-              </p>
-            </div>
+{{-- Vision & Mission --}}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6" data-aos="zoom-in">
+        <div class="bg-white p-5 rounded shadow text-center h-100">
+          <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width:60px;height:60px;">
+            <i data-lucide="eye-off" class="w-5 h-5"></i>
           </div>
+          <h4 class="text-primary mb-3">Our Vision</h4>
+          <p class="text-muted">
+            To be the leader in making reliable and affordable networks that meet the people's needs by helping customers run profitable businesses using present and future information and communication technology systems.
+          </p>
         </div>
-
-        {{-- Background --}}
-        <div class="col-md-6 animate__animated animate__fadeInRight">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3"
-                   style="width:60px;height:60px;">
-                <i class="bi bi-building fs-3"></i>
-              </div>
-              <h5 class="card-title text-primary-blue">Background</h5>
-              <p class="text-muted">
-                Based in Trust Building, Moi Avenue, Nairobi, NetVoice Systems serves diverse industries —
-                from banks and insurance companies to NGOs, learning institutions, and manufacturing firms.
-              </p>
-            </div>
+      </div>
+      <div class="col-md-6" data-aos="zoom-in">
+        <div class="bg-white p-5 rounded shadow text-center h-100">
+          <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width:60px;height:60px;">
+            <i data-lucide="target" class="w-5 h-5"></i>
           </div>
+          <h4 class="text-success mb-3">Our Mission</h4>
+          <p class="text-muted">
+            Grow and let grow, never ignore to feed the needy just because they are old enough to die.
+          </p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  {{-- Mission & Vision --}}
-  <section class="py-5 bg-white">
-    <div class="container text-center">
-      <h2 class="mb-4">Our Mission & Vision</h2>
-      <div class="row g-4">
-        {{-- Mission --}}
-        <div class="col-md-6 animate__animated animate__fadeInLeft">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3"
-                   style="width:60px;height:60px;">
-                <i class="bi bi-bullseye fs-3"></i>
+{{-- Team Section --}}
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="mb-4 text-primary" data-aos="fade-up">Meet Our Leadership Team</h2>
+    <p class="text-muted mb-5" data-aos="fade-up" data-aos-delay="100">
+      Our team of locally and internationally trained professionals brings deep expertise in ICT and automation. With decades of combined experience, we deliver future-ready infrastructure to enterprises across Kenya and East Africa.
+    </p>
+    <div class="row justify-content-center">
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="card border-0 shadow-sm text-center p-4">
+          {{-- Team Image onboarded into public/images/team --}}
+          <img src="{{ asset('images/clients/netvoice_team.jpg') }}"
+               alt="Netvoice Leadership Team"
+               class="img-fluid rounded shadow"
+               style="width:100%;height:300px;object-fit:cover;"
+               loading="lazy">
+          <h5 class="text-primary mt-3">Leadership Team</h5>
+          <p class="text-muted small">Visionary engineers and directors committed to quality, innovation, and customer success.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{-- Timeline Section --}}
+<section class="py-5 bg-white">
+  <div class="container">
+    <h2 class="text-center mb-5 text-primary" data-aos="fade-up">Milestones & Growth</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <ul class="timeline list-unstyled position-relative">
+          @php
+            $milestones = [
+              ['year' => '2013', 'title' => 'Company Registered', 'desc' => 'Netvoice Systems Engineering Ltd officially registered in Nairobi.'],
+              ['year' => '2014', 'title' => 'First Major Project', 'desc' => 'Structured cabling for a 10-story commercial complex.'],
+              ['year' => '2016', 'title' => 'Solar Division Launched', 'desc' => 'Started offering off-grid and hybrid solar installations.'],
+              ['year' => '2019', 'title' => 'NGO & Education Expansion', 'desc' => 'Deployed surveillance and network systems in 30+ schools and NGO offices.'],
+              ['year' => '2023', 'title' => '200+ Enterprises Served', 'desc' => 'Crossed 200 active clients across banking, manufacturing, and commercial sectors.'],
+            ];
+          @endphp
+
+          @foreach($milestones as $item)
+            <li class="mb-5 d-flex align-items-start" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+              <div class="bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width:50px;height:50px;">
+                <strong>{{ $item['year'] }}</strong>
               </div>
-              <h5 class="card-title text-primary-blue">Our Mission</h5>
-              <p class="text-muted">
-                Grow and let grow, never ignore to feed the needy just because they are old to die!
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {{-- Vision --}}
-        <div class="col-md-6 animate__animated animate__fadeInRight">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <div class="rounded bg-accent-orange text-white d-flex align-items-center justify-content-center mb-3"
-                   style="width:60px;height:60px;">
-                <i class="bi bi-eye fs-3"></i>
+              <div>
+                <h5 class="mb-1 text-primary">{{ $item['title'] }}</h5>
+                <p class="text-muted small mb-2">{{ $item['desc'] }}</p>
+                {{-- Milestone images onboarded into public/images/milestones --}}
+                <img src="{{ asset('images/milestones/' . $item['year'] . '.jpg') }}"
+                     alt="{{ $item['title'] }}"
+                     class="img-fluid rounded shadow"
+                     style="width:100%;max-height:200px;object-fit:cover;"
+                     loading="lazy">
               </div>
-              <h5 class="card-title text-primary-blue">Our Vision</h5>
-              <p class="text-muted">
-                To be the leader in making reliable and affordable networks that help customers run
-                profitable businesses using present and future ICT systems.
-              </p>
-            </div>
-          </div>
-        </div>
+            </li>
+          @endforeach
+        </ul>
       </div>
     </div>
-  </section>
-  {{-- Core Values --}}
-  <section class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="mb-4">Our Core Values</h2>
-      <p class="text-muted mb-5">Guided by principles that shape our culture and service delivery.</p>
-      <div class="row g-4">
-        <div class="col-md-3 animate__animated animate__fadeInLeft">
-          <i class="bi bi-person-check fs-1 text-accent-orange mb-3"></i>
-          <h5>Self-Realization</h5>
-          <p class="text-muted small">Optimizing personal development and innovative potential of all our people.</p>
-        </div>
-        <div class="col-md-3 animate__animated animate__fadeInUp">
-          <i class="bi bi-people fs-1 text-accent-orange mb-3"></i>
-          <h5>Interdependence</h5>
-          <p class="text-muted small">Creating freedom of mind and action for collective benefit.</p>
-        </div>
-        <div class="col-md-3 animate__animated animate__fadeInUp">
-          <i class="bi bi-award fs-1 text-accent-orange mb-3"></i>
-          <h5>Leadership</h5>
-          <p class="text-muted small">Developing capable leaders to achieve social and organizational goals.</p>
-        </div>
-        <div class="col-md-3 animate__animated animate__fadeInRight">
-          <i class="bi bi-hand-thumbs-up fs-1 text-accent-orange mb-3"></i>
-          <h5>Service</h5>
-          <p class="text-muted small">Delivering solutions that meet the needs and satisfaction of society at large.</p>
-        </div>
-      </div>
+  </div>
+</section>
 
-      <div class="row g-4 mt-4">
-        <div class="col-md-3 animate__animated animate__fadeInLeft">
-          <i class="bi bi-emoji-smile fs-1 text-accent-orange mb-3"></i>
-          <h5>Pleasure</h5>
-          <p class="text-muted small">Enhancing enjoyment of life and creating happiness through our work.</p>
-        </div>
-        <div class="col-md-3 animate__animated animate__fadeInUp">
-          <i class="bi bi-cash-stack fs-1 text-accent-orange mb-3"></i>
-          <h5>Wealth</h5>
-          <p class="text-muted small">Creating financial resources for our people and the wider community.</p>
-        </div>
-        <div class="col-md-3 animate__animated animate__fadeInUp">
-          <i class="bi bi-heart fs-1 text-accent-orange mb-3"></i>
-          <h5>Parenthood</h5>
-          <p class="text-muted small">Supporting good parenthood to build a stronger society.</p>
-        </div>
-        <div class="col-md-3 animate__animated animate__fadeInRight">
-          <i class="bi bi-globe fs-1 text-accent-orange mb-3"></i>
-          <h5>Society</h5>
-          <p class="text-muted small">Working with society to improve quality of life for all.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+{{-- Timeline Styles --}}
+<style>
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 25px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #002366;
+  }
+</style>
 
-  {{-- Team & Background --}}
-  <section class="py-5 bg-white">
-    <div class="container text-center">
-      <h2 class="mb-4">Our Background</h2>
-      <p class="text-muted mb-5">
-        Founded in August 2013, NetVoice Systems Engineering Ltd operates from Trust Building, Moi Avenue, Nairobi.
-        Our directors are indigenous Kenyans with local and international training, committed to continuous learning
-        and adapting to ICT industry changes.
-      </p>
-      <p class="text-muted">
-        We proudly serve diverse industries including banks, insurance companies, NGOs, learning institutions,
-        manufacturing, construction, and general businesses. Our partnerships span leading global vendors such as
-        Cisco, Microsoft, IBM, Alcatel, Hikvision, and Panasonic.
-      </p>
-    </div>
-  </section>
-
-  {{-- CTA Section --}}
-  <section class="py-5 bg-primary-blue text-white text-center">
-    <div class="container">
-      <h2 class="mb-3 animate__animated animate__fadeInUp">Partner With NetVoice Systems</h2>
-      <p class="lead text-gray-200 mb-4 animate__animated animate__fadeInUp">
-        Join us in building reliable, affordable, and future-ready ICT networks that empower businesses and communities.
-      </p>
-      <a href="{{ route('contact') }}" class="btn bg-accent-orange text-white animate__animated animate__pulse">
-        Contact Us Today
-      </a>
-    </div>
-  </section>
+{{-- CTA Section --}}
+<section class="py-5 bg-primary-blue text-white text-center">
+  <div class="container" data-aos="fade-up">
+    <h2 class="mb-3 animate__animated animate__fadeInUp">Partner With Netvoice Systems</h2>
+    <p class="lead mb-4 animate__animated animate__fadeInUp">
+      Join us in building reliable, affordable, and future-ready ICT networks that empower businesses and communities.
+    </p>
+    <a href="{{ route('contact') }}" 
+       class="btn bg-success text-white px-5 py-3 rounded shadow animate__animated animate__pulse" 
+       aria-label="Contact Us Today">
+      Contact Us Today
+    </a>
+  </div>
+</section>
 
 @endsection
-

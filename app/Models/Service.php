@@ -9,14 +9,38 @@ class Service extends Model
 {
     use HasFactory;
 
+    /**
+     * Mass assignable attributes.
+     */
     protected $fillable = [
         'name',
         'slug',
         'summary',
         'body',
+        'hero_heading',
+        'hero_subheading',
+        'features',
+        'process_steps',
+        'partners',
         'is_active',
         'sort_order',
     ];
+
+    /**
+     * Attribute casting.
+     */
+    protected $casts = [
+        'is_active'       => 'boolean',
+        'sort_order'      => 'integer',
+        'features'        => 'array',
+        'process_steps'   => 'array',
+        'partners'        => 'array',
+    ];
+
+    /**
+     * Default ordering constant.
+     */
+    public const DEFAULT_ORDER = 'asc';
 
     /**
      * Scope: only active services.
@@ -31,7 +55,7 @@ class Service extends Model
      */
     public function scopeOrdered($query)
     {
-        return $query->orderBy('sort_order', 'asc');
+        return $query->orderBy('sort_order', self::DEFAULT_ORDER);
     }
 
     /**
@@ -64,5 +88,37 @@ class Service extends Model
     public function getBodyAttribute($value)
     {
         return $value ?: 'Details coming soon.';
+    }
+
+    /**
+     * Accessor: fallback hero heading.
+     */
+    public function getHeroHeadingAttribute($value)
+    {
+        return $value ?: $this->name;
+    }
+
+    /**
+     * Accessor: fallback hero subheading.
+     */
+    public function getHeroSubheadingAttribute($value)
+    {
+        return $value ?: 'Comprehensive ICT solutions for your enterprise.';
+    }
+
+    /**
+     * Helper: check if service is active.
+     */
+    public function isActive(): bool
+    {
+        return (bool) $this->is_active;
+    }
+
+    /**
+     * Helper: get primary media (first image/icon).
+     */
+    public function primaryMedia()
+    {
+        return $this->media()->first();
     }
 }

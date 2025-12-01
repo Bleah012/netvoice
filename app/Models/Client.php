@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class Client extends Model
 {
@@ -72,5 +73,23 @@ class Client extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    /**
+     * Boot hooks to auto-generate slug
+     */
+    protected static function booted()
+    {
+        static::creating(function ($client) {
+            if (empty($client->slug)) {
+                $client->slug = Str::slug($client->name);
+            }
+        });
+
+        static::updating(function ($client) {
+            if (empty($client->slug)) {
+                $client->slug = Str::slug($client->name);
+            }
+        });
     }
 }

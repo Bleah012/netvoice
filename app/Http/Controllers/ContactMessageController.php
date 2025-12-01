@@ -12,26 +12,30 @@ class ContactMessageController extends Controller
      * Store new contact message (from public form)
      */
     public function store(Request $request)
-    {
-        $data = $request->validate([
-            'name'    => ['required','string','max:150'],
-            'email'   => ['required','email','max:150'],
-            'phone'   => ['nullable','string','max:50'],
-            'subject' => ['required','string','max:255'],
-            'message' => ['required','string'],
-        ]);
+{
+    $data = $request->validate([
+        'name'    => ['required','string','max:150'],
+        'email'   => ['required','email','max:150'],
+        'phone'   => ['nullable','string','max:50'],
+        'subject' => ['required','string','max:255'],
+        'message' => ['required','string'],
+    ]);
 
-        // Default status for new messages
-        $data['status'] = 'new';
+    // Default status for new messages
+    $data['status'] = 'new';
 
-        // Generate a unique slug based on subject + timestamp
-        $data['slug'] = Str::slug($data['subject'] . '-' . now()->timestamp);
+    // Generate a unique slug based on subject + timestamp
+    $data['slug'] = Str::slug($data['subject'] . '-' . now()->timestamp);
 
-        $contactMessage = ContactMessage::create($data);
+    // Create the message
+    $contactMessage = ContactMessage::create($data);
 
-        return redirect()->route('contact')
-                         ->with('status', 'Your message has been sent successfully.');
-    }
+    // Flash success message with clickable link
+    return redirect()->route('contact')
+                     ->with('success', 'Your message has been sent successfully. 
+                        <a href="' . route('contact-messages.show', $contactMessage) . '" 
+                           class="text-white text-decoration-underline">View message</a>');
+}
 
     /**
      * Admin-only listing
@@ -62,7 +66,7 @@ class ContactMessageController extends Controller
         $contactMessage->update($data);
 
         return redirect()->route('contact-messages.show', $contactMessage)
-                         ->with('status', 'Message status updated.');
+                         ->with('success', 'Message status updated.');
     }
 
     /**
@@ -73,6 +77,6 @@ class ContactMessageController extends Controller
         $contactMessage->delete();
 
         return redirect()->route('contact-messages.index')
-                         ->with('status', 'Message deleted.');
+                         ->with('success', 'Message deleted.');
     }
 }

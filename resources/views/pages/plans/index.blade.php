@@ -13,64 +13,49 @@
     </div>
   </section>
 
-  {{-- Pricing Tiers --}}
+  {{-- Dynamic Plans Listing --}}
   <section class="py-5 bg-light">
     <div class="container text-center">
       <h2 class="mb-4">Flexible Pricing Options</h2>
       <div class="row g-4">
-        {{-- Basic Plan --}}
-        <div class="col-md-4 animate__animated animate__fadeInLeft">
-          <div class="card shadow-sm h-100">
-            <div class="card-header bg-accent-orange text-white">
-              <h4 class="my-0 fw-normal">Basic</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">KES 5,000 <small class="text-muted">/mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4 text-muted">
-                <li>✔ Structured cabling setup</li>
-                <li>✔ Basic support</li>
-                <li>✔ Entry-level ICT solutions</li>
-              </ul>
-              <button class="btn bg-primary-blue text-white w-100">Choose Basic</button>
-            </div>
-          </div>
-        </div>
+        @forelse($plans as $plan)
+          <div class="col-md-4 animate__animated animate__fadeInUp">
+            <div class="card shadow-sm h-100">
+              <div class="card-header bg-accent-orange text-white">
+                <h4 class="my-0 fw-normal">{{ $plan->name }}</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  KES {{ number_format($plan->price_cents / 100, 2) }}
+                  <small class="text-muted">/{{ $plan->billing_period }}</small>
+                </h1>
+                <p class="text-muted">{{ $plan->description }}</p>
 
-        {{-- Standard Plan --}}
-        <div class="col-md-4 animate__animated animate__fadeInUp">
-          <div class="card shadow-sm h-100">
-            <div class="card-header bg-accent-orange text-white">
-              <h4 class="my-0 fw-normal">Standard</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">KES 15,000 <small class="text-muted">/mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4 text-muted">
-                <li>✔ Networking products</li>
-                <li>✔ CCTV & surveillance</li>
-                <li>✔ Priority support</li>
-              </ul>
-              <button class="btn bg-primary-blue text-white w-100">Choose Standard</button>
-            </div>
-          </div>
-        </div>
+                {{-- Public view --}}
+                <a href="{{ route('plans.show', $plan->id) }}" class="btn bg-primary-blue text-white w-100 mb-2">
+                  View Details
+                </a>
 
-        {{-- Premium Plan --}}
-        <div class="col-md-4 animate__animated animate__fadeInRight">
-          <div class="card shadow-sm h-100">
-            <div class="card-header bg-accent-orange text-white">
-              <h4 class="my-0 fw-normal">Premium</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">KES 30,000 <small class="text-muted">/mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4 text-muted">
-                <li>✔ Full ICT integration</li>
-                <li>✔ Solar & electrical systems</li>
-                <li>✔ Dedicated account manager</li>
-              </ul>
-              <button class="btn bg-primary-blue text-white w-100">Choose Premium</button>
+                {{-- Admin actions --}}
+                @auth
+                  <a href="{{ route('plans.edit', $plan->id) }}" class="btn btn-outline-secondary w-100 mb-2">
+                    Edit Plan
+                  </a>
+                  <form action="{{ route('plans.destroy', $plan->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger w-100"
+                            onclick="return confirm('Are you sure you want to delete this plan?')">
+                      Delete Plan
+                    </button>
+                  </form>
+                @endauth
+              </div>
             </div>
           </div>
-        </div>
+        @empty
+          <p class="text-muted">No plans available yet.</p>
+        @endforelse
       </div>
     </div>
   </section>

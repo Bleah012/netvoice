@@ -10,6 +10,7 @@
   <div class="mb-3">
     <span class="badge bg-info me-2">Status: {{ $plan->is_active ? 'Active' : 'Inactive' }}</span>
     <span class="badge bg-warning">Sort Order: {{ $plan->sort_order }}</span>
+    <span class="badge bg-secondary">Billing: {{ ucfirst($plan->billing_period) }}</span>
   </div>
 
   {{-- Plan Description --}}
@@ -28,7 +29,7 @@
     <div class="card-body">
       <h5 class="text-primary-blue fw-bold">Pricing</h5>
       <p class="fs-4 fw-semibold text-accent-orange">
-        {{ $plan->price ? 'USD ' . number_format($plan->price, 2) : 'Contact us for pricing' }}
+        {{ $plan->price_cents ? 'USD ' . number_format($plan->price_cents / 100, 2) : 'Contact us for pricing' }}
       </p>
     </div>
   </div>

@@ -5,7 +5,7 @@
 <div class="container py-5">
   <h1 class="mb-4 text-primary-blue fw-bold">Edit Plan</h1>
 
-  <form action="{{ route('plans.update', $plan->slug ?? $plan->id) }}" method="POST" class="p-4 bg-light rounded shadow-sm">
+  <form action="{{ route('plans.update', $plan->id) }}" method="POST" class="p-4 bg-light rounded shadow-sm">
     @csrf
     @method('PUT')
 
@@ -26,7 +26,22 @@
 
     <div class="mb-3">
       <label class="form-label fw-bold">Price (USD)</label>
-      <input type="number" step="0.01" name="price" class="form-control" value="{{ old('price', $plan->price) }}">
+      <input type="number" step="0.01" name="price_cents" class="form-control"
+             value="{{ old('price_cents', $plan->price_cents / 100) }}" required>
+      <small class="text-muted">Enter price in dollars; stored internally as cents.</small>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Billing Period</label>
+      <select name="billing_period" class="form-select" required>
+        <option value="monthly" {{ old('billing_period', $plan->billing_period) === 'monthly' ? 'selected' : '' }}>Monthly</option>
+        <option value="yearly" {{ old('billing_period', $plan->billing_period) === 'yearly' ? 'selected' : '' }}>Yearly</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Active</label>
+      <input type="checkbox" name="is_active" value="1" {{ old('is_active', $plan->is_active) ? 'checked' : '' }}>
     </div>
 
     <div class="mb-3">

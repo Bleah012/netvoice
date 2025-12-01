@@ -9,15 +9,45 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['client_id','name','slug','status','started_at','completed_at'];
+    protected $fillable = [
+        'client_id',
+        'name',
+        'slug',
+        'status',
+        'category',
+        'tags',
+        'description',
+        'image',
+        'started_at',
+        'completed_at',
+    ];
 
+    protected $casts = [
+        'tags'        => 'array',     // auto-decode JSON into array
+        'started_at'  => 'datetime',
+        'completed_at'=> 'datetime',
+    ];
+
+    /**
+     * Relationships
+     */
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function media()
+    /**
+     * Helper to resolve image path or fallback
+     */
+    public function imageUrl(): ?string
     {
-        return $this->morphMany(Media::class, 'model');
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
+
+        $fallbackPath = public_path("images/projects/{$this->slug}.jpg");
+        return file_exists($fallbackPath)
+            ? asset("images/projects/{$this->slug}.jpg")
+            : null;
     }
 }

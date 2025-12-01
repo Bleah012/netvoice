@@ -2,7 +2,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-
 <div class="container-fluid">
   <div class="row">
     {{-- Sidebar --}}
@@ -26,188 +25,216 @@
       </div>
     </nav>
 
-    {{-- Overview Cards --}}
+    {{-- Main content --}}
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="row my-4">
+
+      {{-- KPI Cards --}}
+      <div class="row g-3 mb-4">
         <div class="col-md-3">
           <div class="card shadow-sm h-100 text-center">
             <div class="card-body">
-              <i class="bi bi-check-circle fs-1 text-accent-orange mb-2"></i>
-              <h5 class="card-title">Active Services</h5>
-              <p class="text-muted">{{ $activeServicesCount }}</p>
+              <h6 class="text-muted">Total Projects</h6>
+              <div class="fs-3 fw-bold">{{ $totalProjects }}</div>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card shadow-sm h-100 text-center">
             <div class="card-body">
-              <i class="bi bi-envelope-open fs-1 text-accent-orange mb-2"></i>
-              <h5 class="card-title">Open Tickets</h5>
-              <p class="text-muted">{{ $openTicketsCount }}</p>
+              <h6 class="text-muted">Active Support Tickets</h6>
+              <div class="fs-3 fw-bold">{{ $activeTicketsCount }}</div>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card shadow-sm h-100 text-center">
             <div class="card-body">
-              <i class="bi bi-credit-card fs-1 text-accent-orange mb-2"></i>
-              <h5 class="card-title">Invoices</h5>
-              <p class="text-muted">{{ $invoicesCount }}</p>
+              <h6 class="text-muted">New Clients</h6>
+              <div class="fs-3 fw-bold">{{ $newClientsCount }}</div>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card shadow-sm h-100 text-center">
             <div class="card-body">
-              <i class="bi bi-bell fs-1 text-accent-orange mb-2"></i>
-              <h5 class="card-title">Notifications</h5>
-              <p class="text-muted">{{ $notificationsCount }}</p>
+              <h6 class="text-muted">Notifications</h6>
+              <div class="fs-3 fw-bold">{{ $notificationsCount }}</div>
             </div>
           </div>
         </div>
       </div>
 
-      {{-- Admin: Plans quick actions --}}
-      @if(auth()->user()?->isAdmin())
-      <div class="row mb-4">
-        <div class="col-12">
+      {{-- Recent Projects & Active Tickets --}}
+      <div class="row g-4 mb-5">
+        <div class="col-lg-6">
           <div class="card shadow-sm">
-            <div class="card-body d-flex justify-content-between align-items-center">
-              <div>
-                <h5 class="card-title mb-1">Plans Management</h5>
-                <p class="text-muted mb-0">Create, edit, and organize pricing plans.</p>
-              </div>
-              <div class="d-flex gap-2">
-                <a href="{{ route('plans.create') }}" class="btn bg-accent-orange text-white">
-                  <i class="bi bi-plus-circle me-1"></i> Add Plan
-                </a>
-                <a href="{{ route('plans.index') }}" class="btn btn-outline-secondary">
-                  <i class="bi bi-pencil-square me-1"></i> Edit Plans
-                </a>
-              </div>
+            <div class="card-header bg-white">
+              <h5 class="mb-0">Recent Projects</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                @forelse($projectsRecent as $p)
+                  @php
+                    $map = ['completed' => 'success', 'in_progress' => 'warning', 'pending' => 'secondary'];
+                    $color = $map[strtolower($p->status)] ?? 'info';
+                  @endphp
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ $p->name }}</span>
+                    <span class="badge text-bg-{{ $color }}">{{ ucwords(str_replace('_',' ', $p->status)) }}</span>
+                  </li>
+                @empty
+                  <li class="list-group-item text-muted">No recent projects.</li>
+                @endforelse
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card shadow-sm">
+            <div class="card-header bg-white">
+              <h5 class="mb-0">Active Support Tickets</h5>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr><th>Subject</th><th>Priority</th><th>Status</th><th>Created</th></tr>
+                </thead>
+                <tbody>
+                  @forelse($ticketsActive as $t)
+                    @php
+                      $prio = ['high'=>'danger','medium'=>'primary','low'=>'success'][strtolower($t->priority)] ?? 'secondary';
+                      $stat = ['open'=>'danger','in_progress'=>'warning','resolved'=>'success'][strtolower($t->status)] ?? 'secondary';
+                    @endphp
+                    <tr>
+                      <td>{{ $t->subject }}</td>
+                      <td><span class="badge text-bg-{{ $prio }}">{{ ucfirst($t->priority) }}</span></td>
+                      <td><span class="badge text-bg-{{ $stat }}">{{ ucwords(str_replace('_',' ', $t->status)) }}</span></td>
+                      <td>{{ $t->created_at->format('Y-m-d') }}</td>
+                    </tr>
+                  @empty
+                    <tr><td colspan="4" class="text-muted">No active tickets.</td></tr>
+                  @endforelse
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
-      @endif
 
-      {{-- Tabs for Activity --}}
-      <section class="py-5 bg-light">
-        <div class="container">
-          <ul class="nav nav-pills justify-content-center mb-4" id="dashboardTabs" role="tablist">
-            <li class="nav-item">
-              <button class="nav-link active" id="activity-tab" data-bs-toggle="tab" data-bs-target="#activity" type="button" role="tab">
-                Recent Activity
-              </button>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button" role="tab">
-                Notifications ({{ $notificationsCount }})
-              </button>
-            </li>
-          </ul>
+      {{-- Services Management --}}
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Services Management</h5>
+        @if(auth()->user()?->isAdmin())
+          <a href="{{ route('services.index') }}" class="btn bg-accent-orange text-white">Add Service</a>
+        @endif
+      </div>
 
-          <div class="tab-content" id="dashboardTabsContent">
-            {{-- Activity tab --}}
-            <div class="tab-pane fade show active" id="activity" role="tabpanel">
-              <div class="table-responsive shadow-sm rounded">
-                <table class="table table-striped align-middle">
-                  <thead class="table-primary">
-                    <tr>
-                      <th>Date</th>
-                      <th>Type</th>
-                      <th>Item</th>
-                      <th>Status</th>
-                      <th class="text-end">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @forelse($activities as $item)
-                      <tr>
-                        <td>{{ $item['date']->format('Y-m-d H:i') }}</td>
-                        <td>{{ $item['type'] }}</td>
-                        <td>{{ $item['label'] }}</td>
-                        <td>
-                          @php
-                            $status = strtolower($item['status'] ?? 'n/a');
-                            $map = [
-                              'planned'   => 'secondary',
-                              'active'    => 'success',
-                              'paused'    => 'warning',
-                              'completed' => 'primary',
-                              'open'      => 'warning',
-                              'pending'   => 'warning',
-                              'closed'    => 'secondary',
-                            ];
-                            $color = $map[$status] ?? 'info';
-                          @endphp
-                          <span class="badge text-bg-{{ $color }}">{{ ucfirst($status) }}</span>
-                        </td>
-                        <td class="text-end">
-                          <a href="{{ $item['view'] }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> View</a>
-                          @if(auth()->user()?->isAdmin())
-                            <a href="{{ $item['edit'] }}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i> Edit</a>
-                          @endif
-                        </td>
-                      </tr>
-                    @empty
-                      <tr><td colspan="5" class="text-center text-muted">No recent activity.</td></tr>
-                    @endforelse
-                  </tbody>
-                </table>
-              </div>
-            </div>
-                        {{-- Notifications tab --}}
-            <div class="tab-pane fade" id="notifications" role="tabpanel">
-              <div class="table-responsive shadow-sm rounded">
-                <table class="table table-striped align-middle">
-                  <thead class="table-primary">
-                    <tr>
-                      <th>Date</th>
-                      <th>From</th>
-                      <th>Email</th>
-                      <th>Subject</th>
-                      <th>Status</th>
-                      <th class="text-end">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @forelse($notifications as $msg)
-                      <tr>
-                        <td>{{ $msg->created_at->format('Y-m-d H:i') }}</td>
-                        <td>{{ $msg->name }}</td>
-                        <td><a href="mailto:{{ $msg->email }}">{{ $msg->email }}</a></td>
-                        <td>{{ $msg->subject }}</td>
-                        <td><span class="badge bg-secondary">{{ ucfirst($msg->status) }}</span></td>
-                        <td class="text-end">
-                          <!-- ✅ Pass model instance, Laravel uses slug automatically -->
-                          <a href="{{ route('contact-messages.show', $msg) }}" class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-eye"></i> View
-                          </a>
-                          <form action="{{ route('contact-messages.destroy', $msg) }}" method="POST" class="d-inline">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger"
-                                    onclick="return confirm('Are you sure you want to delete this message?')">
-                              <i class="bi bi-trash"></i> Delete
-                            </button>
-                          </form>
-                        </td>
-                      </tr>
-                    @empty
-                      <tr><td colspan="6" class="text-center text-muted">No notifications yet.</td></tr>
-                    @endforelse
-                  </tbody>
-                </table>
-              </div>
-              <div class="text-end mt-2">
-                <a href="{{ route('contact-messages.index') }}" class="btn btn-outline-secondary">
-                  <i class="bi bi-inbox"></i> View all messages
-                </a>
+      <div class="row g-3 mb-5">
+        @forelse($services as $s)
+          <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <h6 class="mb-1">{{ $s->name }}</h6>
+                    <p class="text-muted small mb-3">{{ $s->summary }}</p>
+                  </div>
+                  @if(auth()->user()?->isAdmin())
+                    <a href="{{ route('services.show', $s->slug) }}" class="text-muted"><i class="bi bi-pencil-square"></i></a>
+                  @endif
+                </div>
+                @if(auth()->user()?->isAdmin())
+                  <form action="{{ route('services.update', $s->slug) }}" method="POST" class="d-flex align-items-center gap-2">
+                    @csrf @method('PUT')
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" name="is_active" value="1" @checked($s->is_active)>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary">Save</button>
+                  </form>
+                @else
+                  <span class="badge {{ $s->is_active ? 'text-bg-success' : 'text-bg-secondary' }}">
+                    {{ $s->is_active ? 'Active' : 'Inactive' }}
+                  </span>
+                @endif
               </div>
             </div>
           </div>
+        @empty
+          <div class="col-12 text-muted">No services configured.</div>
+        @endforelse
+      </div>
+            {{-- Contact Submissions --}}
+      <div class="card shadow-sm mb-5">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Contact Submissions</h5>
+          <a href="{{ route('contact-messages.index') }}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-inbox"></i> View all
+          </a>
         </div>
-      </section>
+        <div class="card-body table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr><th>Date</th><th>Name</th><th>Email</th><th>Subject</th><th>Status</th><th class="text-end">Actions</th></tr>
+            </thead>
+            <tbody>
+              @forelse($notifications as $msg)
+                <tr>
+                  <td>{{ $msg->created_at->format('Y-m-d H:i') }}</td>
+                  <td>{{ $msg->name }}</td>
+                  <td><a href="mailto:{{ $msg->email }}">{{ $msg->email }}</a></td>
+                  <td>{{ $msg->subject }}</td>
+                  <td><span class="badge text-bg-secondary">{{ ucfirst($msg->status) }}</span></td>
+                  <td class="text-end">
+                    <a href="{{ route('contact-messages.show', $msg) }}" class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-eye"></i> View
+                    </a>
+                    @if(auth()->user()?->isAdmin())
+                      <form action="{{ route('contact-messages.destroy', $msg) }}" method="POST" class="d-inline">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Delete this message?')">
+                          <i class="bi bi-trash"></i> Delete
+                        </button>
+                      </form>
+                    @endif
+                  </td>
+                </tr>
+              @empty
+                <tr><td colspan="6" class="text-muted text-center">No notifications yet.</td></tr>
+              @endforelse
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {{-- Users Management --}}
+      <div class="card shadow-sm mb-5">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Users Management</h5>
+        </div>
+        <div class="card-body table-responsive">
+          <table class="table align-middle">
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Last Login</th></tr></thead>
+            <tbody>
+              @forelse($usersRecent as $u)
+                @php
+                  $roleColor = ['admin'=>'primary','manager'=>'warning','user'=>'secondary'][strtolower($u->role)] ?? 'info';
+                @endphp
+                <tr>
+                  <td>{{ $u->name }}</td>
+                  <td>{{ $u->email }}</td>
+                  <td><span class="badge text-bg-{{ $roleColor }}">{{ ucfirst($u->role) }}</span></td>
+                  <td><span class="badge text-bg-success">{{ ucfirst($u->status ?? 'active') }}</span></td>
+                  <td>{{ optional($u->last_login_at)->format('Y-m-d H:i') ?? '—' }}</td>
+                </tr>
+              @empty
+                <tr><td colspan="5" class="text-muted text-center">No users yet.</td></tr>
+              @endforelse
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       {{-- Quick Actions --}}
       <section class="py-5 bg-white">
@@ -233,7 +260,7 @@
         </div>
       </section>
 
-      {{-- CTA --}}
+      {{-- CTA Banner --}}
       <section class="py-5 bg-primary-blue text-white text-center">
         <div class="container">
           <h2 class="mb-3">Manage Your Account Efficiently</h2>
