@@ -3,9 +3,9 @@
     {{-- Logo --}}
     <a href="{{ route('home') }}" class="d-flex align-items-center text-decoration-none">
       <div class="d-flex align-items-center me-3">
-        <div class="rounded-3 d-flex align-items-center justify-content-center"
+        <div class="rounded-3 overflow-hidden d-flex align-items-center justify-content-center"
              style="width:40px;height:40px;background-color:var(--primary-blue);">
-          <span class="text-white fw-bold fs-5">N</span>
+          <img src="{{ asset('images/logo.png') }}" alt="Netvoice Logo" style="width:100%; height:auto;">
         </div>
       </div>
       <div class="d-flex flex-column lh-1">
