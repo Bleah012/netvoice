@@ -97,7 +97,7 @@
           <img src="{{ asset('images/clients/netvoice_team.jpg') }}"
                alt="Netvoice Leadership Team"
                class="img-fluid rounded shadow"
-               style="width:100%;height:300px;object-fit:cover;"
+               style="width:500px;height:400px;object-fit:cover;"
                loading="lazy">
           <h5 class="text-primary mt-3">Leadership Team</h5>
           <p class="text-muted small">Visionary engineers and directors committed to quality, innovation, and customer success.</p>
@@ -135,7 +135,7 @@
                 <img src="{{ asset('images/milestones/' . $item['year'] . '.jpg') }}"
                      alt="{{ $item['title'] }}"
                      class="img-fluid rounded shadow"
-                     style="width:100%;max-height:200px;object-fit:cover;"
+                     style="width:100%;max-height:450px;object-fit:cover;"
                      loading="lazy">
               </div>
             </li>
